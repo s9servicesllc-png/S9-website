@@ -4,352 +4,410 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>S9 Services LLC | Residential Construction & Development</title>
-
 <meta name="description" content="S9 Services LLC provides residential construction and development services including roofing, decks, additions, rural projects and new home construction in Byron Michigan and surrounding areas.">
 
 <style>
-
 body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:#ffffff;
-color:#111;
-line-height:1.6;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#ffffff;
+  color:#111;
+  line-height:1.6;
 }
 
 header{
-background:#000;
-color:white;
-text-align:center;
-padding:30px 20px;
+  background:#000;
+  color:#fff;
+  text-align:center;
+  padding:30px 20px;
 }
 
 header h1{
-margin:0;
-font-size:32px;
+  margin:0;
+  font-size:32px;
 }
 
 header p{
-margin-top:8px;
-font-size:18px;
+  margin-top:8px;
+  font-size:18px;
 }
 
 nav{
-background:white;
-border-bottom:1px solid #e5e5e5;
-text-align:center;
-padding:14px;
+  background:#fff;
+  border-bottom:1px solid #e5e5e5;
+  text-align:center;
+  padding:14px;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
 nav a{
-margin:0 12px;
-text-decoration:none;
-color:#111;
-font-weight:bold;
+  margin:0 12px;
+  text-decoration:none;
+  color:#111;
+  font-weight:bold;
 }
 
 .hero{
-padding:70px 20px;
-text-align:center;
-background:#f5f5f5;
+  padding:70px 20px;
+  text-align:center;
+  background:#f5f5f5;
 }
 
 .hero h2{
-font-size:40px;
-margin-bottom:18px;
+  font-size:40px;
+  margin-bottom:18px;
 }
 
 .hero p{
-max-width:750px;
-margin:auto;
-font-size:18px;
+  max-width:750px;
+  margin:auto;
+  font-size:18px;
 }
 
 .btn{
-display:inline-block;
-margin:10px;
-padding:14px 22px;
-background:#000;
-color:white;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
+  display:inline-block;
+  margin:10px;
+  padding:14px 22px;
+  background:#000;
+  color:#fff;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
 }
 
 section{
-max-width:1100px;
-margin:auto;
-padding:50px 20px;
+  max-width:1100px;
+  margin:auto;
+  padding:50px 20px;
 }
 
 h3{
-font-size:28px;
-margin-bottom:16px;
+  font-size:28px;
+  margin-bottom:16px;
 }
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
 .card{
-background:white;
-border:1px solid #e5e5e5;
-border-radius:10px;
-padding:20px;
+  background:#fff;
+  border:1px solid #e5e5e5;
+  border-radius:10px;
+  padding:20px;
 }
 
 .card h4{
-margin-top:0;
+  margin-top:0;
 }
 
 .dark{
-background:#000;
-color:white;
-padding:30px;
-border-radius:12px;
-margin-bottom:20px;
+  background:#000;
+  color:#fff;
+  padding:30px;
+  border-radius:12px;
+  margin-bottom:20px;
 }
 
 form{
-display:grid;
-gap:14px;
+  display:grid;
+  gap:14px;
 }
 
 input,select,textarea{
-padding:12px;
-border-radius:6px;
-border:1px solid #ccc;
-font-size:16px;
-width:100%;
+  padding:12px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:16px;
+  width:100%;
+  box-sizing:border-box;
 }
 
 textarea{
-min-height:120px;
+  min-height:120px;
 }
 
 button{
-padding:14px;
-background:black;
-color:white;
-border:none;
-border-radius:6px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
+  padding:14px;
+  background:#000;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 footer{
-background:#000;
-color:white;
-text-align:center;
-padding:30px;
-margin-top:40px;
+  background:#000;
+  color:#fff;
+  text-align:center;
+  padding:30px;
+  margin-top:40px;
 }
 
 .success{
-display:none;
-padding:20px;
-background:#e6f7e6;
-border:1px solid #b5e3b5;
-border-radius:6px;
+  display:none;
+  padding:20px;
+  background:#e6f7e6;
+  border:1px solid #b5e3b5;
+  border-radius:6px;
+  margin-bottom:16px;
 }
 
+.note{
+  font-size:14px;
+  color:#555;
+}
+
+.mobile-call{
+  display:none;
+}
+
+@media (max-width:700px){
+  header h1{
+    font-size:28px;
+  }
+
+  header p{
+    font-size:16px;
+  }
+
+  .hero h2{
+    font-size:32px;
+  }
+
+  .mobile-call{
+    display:block;
+    position:fixed;
+    bottom:16px;
+    right:16px;
+    background:#000;
+    color:#fff;
+    text-decoration:none;
+    padding:14px 18px;
+    border-radius:999px;
+    font-weight:700;
+    box-shadow:0 8px 18px rgba(0,0,0,0.18);
+    z-index:1100;
+  }
+
+  body{
+    padding-bottom:70px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>S9 Services LLC</h1>
-<p>Residential Construction & Development</p>
+  <h1>S9 Services LLC</h1>
+  <p>Residential Construction & Development</p>
 </header>
 
 <nav>
-<a href="#about">About</a>
-<a href="#services">Services</a>
-<a href="#projects">Projects</a>
-<a href="#area">Service Area</a>
-<a href="#project">Start Your Project</a>
-<a href="#contact">Contact</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#projects">Projects</a>
+  <a href="#area">Service Area</a>
+  <a href="#project">Start Your Project</a>
+  <a href="#contact">Contact</a>
 </nav>
 
 <section class="hero">
-<h2>Start-to-Finish Residential Construction</h2>
+  <h2>Start-to-Finish Residential Construction</h2>
+  <p>
+    S9 manages residential construction and development projects from planning through completion.
+    Subcontractors, materials, scheduling, and jobsite progress are coordinated to keep projects organized and moving forward.
+  </p>
 
-<p>
-S9 manages residential construction and development projects from planning through completion.
-Subcontractors, materials, scheduling, and jobsite progress are coordinated to keep projects organized and moving forward.
-</p>
-
-<a class="btn" href="#project">Start Your Project</a>
-<a class="btn" href="tel:6163027699">Call or Text 616-302-7699</a>
-
+  <a class="btn" href="#project">Start Your Project</a>
+  <a class="btn" href="tel:6163027699">Call or Text 616-302-7699</a>
 </section>
 
 <section id="about">
+  <h3>About S9</h3>
+  <p>
+    S9 Services LLC provides residential construction and development services based in Byron, Michigan.
+    Projects are managed from early planning through completion with a focus on coordination, communication, and execution.
+  </p>
 
-<h3>About S9</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Nick Saint Amant</h4>
+      <p><strong>Owner | General Contractor | Site Supervisor</strong></p>
+      <p>Nick oversees construction execution and jobsite supervision.</p>
+    </div>
 
-<p>
-S9 Services LLC provides residential construction and development services based in Byron, Michigan.
-Projects are managed from early planning through completion with a focus on coordination, communication, and execution.
-</p>
-
-<div class="grid">
-
-<div class="card">
-<h4>Nick Saint Amant</h4>
-<p><strong>Owner | General Contractor | Site Supervisor</strong></p>
-<p>Nick oversees construction execution and jobsite supervision.</p>
-</div>
-
-<div class="card">
-<h4>Sarah Saint Amant</h4>
-<p><strong>Owner | Operations Manager | Construction Project Manager</strong></p>
-<p>Sarah manages project coordination and client communication.</p>
-</div>
-
-</div>
-
+    <div class="card">
+      <h4>Sarah Saint Amant</h4>
+      <p><strong>Owner | Operations Manager | Construction Project Manager</strong></p>
+      <p>Sarah manages project coordination and client communication.</p>
+    </div>
+  </div>
 </section>
 
 <section id="services">
+  <h3>Construction Services</h3>
 
-<h3>Construction Services</h3>
-
-<div class="grid">
-
-<div class="card"><h4>New Home Construction</h4><p>Start-to-finish residential home construction.</p></div>
-
-<div class="card"><h4>Roof Replacement</h4><p>Full residential roof replacement services.</p></div>
-
-<div class="card"><h4>Deck Construction</h4><p>Custom deck construction.</p></div>
-
-<div class="card"><h4>Home Additions</h4><p>Professionally managed additions.</p></div>
-
-<div class="card"><h4>Windows & Doors</h4><p>Installation and replacement services.</p></div>
-
-<div class="card"><h4>Siding</h4><p>Exterior siding installation.</p></div>
-
-<div class="card"><h4>Driveways</h4><p>Driveway and access improvements.</p></div>
-
-<div class="card"><h4>Fencing & Rural Projects</h4><p>Livestock fencing and rural property improvements.</p></div>
-
-</div>
-
+  <div class="grid">
+    <div class="card"><h4>New Home Construction</h4><p>Start-to-finish residential home construction.</p></div>
+    <div class="card"><h4>Roof Replacement</h4><p>Full residential roof replacement services.</p></div>
+    <div class="card"><h4>Deck Construction</h4><p>Custom deck construction.</p></div>
+    <div class="card"><h4>Home Additions</h4><p>Professionally managed additions.</p></div>
+    <div class="card"><h4>Windows & Doors</h4><p>Installation and replacement services.</p></div>
+    <div class="card"><h4>Siding</h4><p>Exterior siding installation.</p></div>
+    <div class="card"><h4>Driveways</h4><p>Driveway and access improvements.</p></div>
+    <div class="card"><h4>Fencing & Rural Projects</h4><p>Livestock fencing and rural property improvements.</p></div>
+  </div>
 </section>
 
 <section id="projects">
-
-<h3>Projects</h3>
-
-<div class="card">
-<p>Completed and current construction projects will be featured here.</p>
-<p><strong>Project gallery coming soon.</strong></p>
-</div>
-
+  <h3>Projects</h3>
+  <div class="card">
+    <p>Completed and current construction projects will be featured here.</p>
+    <p><strong>Project gallery coming soon.</strong></p>
+  </div>
 </section>
 
 <section id="area">
-
-<h3>Service Area</h3>
-
-<ul>
-<li>Byron, Michigan</li>
-<li>Owosso</li>
-<li>Howell</li>
-<li>Fowlerville</li>
-<li>Shiawassee County</li>
-<li>Livingston County</li>
-</ul>
-
+  <h3>Service Area</h3>
+  <ul>
+    <li>Byron, Michigan</li>
+    <li>Owosso</li>
+    <li>Howell</li>
+    <li>Fowlerville</li>
+    <li>Shiawassee County</li>
+    <li>Livingston County</li>
+  </ul>
 </section>
 
 <section id="project">
+  <div class="dark">
+    <h3>Start Your Project</h3>
+    <p>
+      Tell us about your project and S9 will follow up to discuss scope, timeline, and next steps.
+    </p>
+  </div>
 
-<div class="dark">
+  <div class="success" id="successMessage">
+    <strong>Thank you!</strong> Your project request has been submitted.
+  </div>
 
-<h3>Start Your Project</h3>
+  <form id="projectForm" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="a37d190c-b4a6-4df2-9602-c8e39a650400">
+    <input type="hidden" name="subject" value="New Project Request – S9 Services LLC">
+    <input type="hidden" name="from_name" value="S9 Services LLC Website">
+    <input type="hidden" name="redirect" value="https://s9services.com/#project">
 
-<p>
-Tell us about your project and S9 will follow up to discuss scope, timeline, and next steps.
-</p>
+    <input type="text" name="Name" placeholder="Full Name" required>
+    <input type="tel" name="Phone" placeholder="Phone Number" required>
+    <input type="email" name="Email" placeholder="Email Address" required>
+    <input type="text" name="Project Address" placeholder="Project Address / City">
 
-</div>
+    <select name="Project Type">
+      <option value="">Type of Project</option>
+      <option>New Home Build</option>
+      <option>Roof Replacement</option>
+      <option>Deck Construction</option>
+      <option>Home Addition</option>
+      <option>Siding</option>
+      <option>Windows / Doors</option>
+      <option>Driveway</option>
+      <option>Fencing / Rural Project</option>
+      <option>Other</option>
+    </select>
 
-<div class="success" id="successMessage">
-<strong>Thank you!</strong> Your project request has been submitted.
-</div>
+    <select name="Project Timeline">
+      <option value="">Project Timeline</option>
+      <option>ASAP</option>
+      <option>1–3 months</option>
+      <option>3–6 months</option>
+      <option>Planning stage</option>
+    </select>
 
-<form action="https://api.web3forms.com/submit" method="POST">
+    <select name="Estimated Budget">
+      <option value="">Estimated Budget</option>
+      <option>Under $5,000</option>
+      <option>$5,000 – $15,000</option>
+      <option>$15,000 – $50,000</option>
+      <option>$50,000 – $150,000</option>
+      <option>$150,000+</option>
+    </select>
 
-<input type="hidden" name="access_key" value="a37d190c-b4a6-4df2-9602-c8e39a650400">
+    <select name="Preferred Contact Method">
+      <option value="">Preferred Contact Method</option>
+      <option>Call</option>
+      <option>Text</option>
+      <option>Email</option>
+    </select>
 
-<input type="hidden" name="subject" value="New Project Request – S9 Services LLC">
+    <textarea name="Project Description" placeholder="Describe the project"></textarea>
 
-<input type="text" name="Name" placeholder="Full Name" required>
-
-<input type="tel" name="Phone" placeholder="Phone Number" required>
-
-<input type="email" name="Email" placeholder="Email Address" required>
-
-<input type="text" name="Project Address" placeholder="Project Address / City">
-
-<select name="Project Type">
-<option>Type of Project</option>
-<option>New Home Build</option>
-<option>Roof Replacement</option>
-<option>Deck Construction</option>
-<option>Home Addition</option>
-<option>Siding</option>
-<option>Windows / Doors</option>
-<option>Driveway</option>
-<option>Fencing / Rural Project</option>
-<option>Other</option>
-</select>
-
-<textarea name="Project Description" placeholder="Describe the project"></textarea>
-
-<button type="submit">Start My Project</button>
-
-</form>
-
+    <button type="submit">Start My Project</button>
+    <p class="note">Project requests are sent to projects@s9services.com.</p>
+  </form>
 </section>
 
 <section id="contact">
+  <h3>Contact</h3>
 
-<h3>Contact</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Call or Text</h4>
+      <p>616-302-7699</p>
+    </div>
 
-<div class="grid">
+    <div class="card">
+      <h4>Email</h4>
+      <p>S9Servicesllc@gmail.com</p>
+    </div>
 
-<div class="card">
-<h4>Call or Text</h4>
-<p>616-302-7699</p>
-</div>
-
-<div class="card">
-<h4>Email</h4>
-<p>projects@s9services.com</p>
-</div>
-
-<div class="card">
-<h4>Location</h4>
-<p>Byron, Michigan</p>
-</div>
-
-</div>
-
+    <div class="card">
+      <h4>Location</h4>
+      <p>Byron, Michigan</p>
+    </div>
+  </div>
 </section>
 
 <footer>
-
-<p><strong>S9 Services LLC</strong></p>
-<p>Residential Construction & Development</p>
-<p>Serving Shiawassee County, Livingston County, and surrounding communities.</p>
-
+  <p><strong>S9 Services LLC</strong></p>
+  <p>Residential Construction & Development</p>
+  <p>Serving Shiawassee County, Livingston County, and surrounding communities.</p>
+  <p>General Information: S9Servicesllc@gmail.com</p>
+  <p>Project Requests: projects@s9services.com</p>
 </footer>
+
+<a class="mobile-call" href="tel:6163027699">Call or Text</a>
+
+<script>
+const form = document.getElementById("projectForm");
+const successMessage = document.getElementById("successMessage");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  const response = await fetch(form.action, {
+    method: "POST",
+    body: formData
+  });
+
+  if (response.ok) {
+    successMessage.style.display = "block";
+    form.reset();
+    successMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+  } else {
+    alert("Something went wrong. Please try again or call/text 616-302-7699.");
+  }
+});
+</script>
 
 </body>
 </html>
