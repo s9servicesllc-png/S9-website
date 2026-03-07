@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>S9 Services LLC | Residential Construction & Development</title>
-<meta name="description" content="S9 Services LLC provides residential construction and development services including roofing, decks, additions, rural projects and new home construction in Byron Michigan and surrounding areas.">
+<meta name="description" content="S9 Services LLC provides residential construction and development services in Byron Michigan including roofing, decks, additions, driveways, rural projects and new home construction.">
 
 <style>
 body{
@@ -15,9 +16,13 @@ body{
   line-height:1.6;
 }
 
+*{
+  box-sizing:border-box;
+}
+
 header{
   background:#000;
-  color:#fff;
+  color:white;
   text-align:center;
   padding:30px 20px;
 }
@@ -33,7 +38,7 @@ header p{
 }
 
 nav{
-  background:#fff;
+  background:white;
   border-bottom:1px solid #e5e5e5;
   text-align:center;
   padding:14px;
@@ -71,7 +76,7 @@ nav a{
   margin:10px;
   padding:14px 22px;
   background:#000;
-  color:#fff;
+  color:white;
   text-decoration:none;
   border-radius:8px;
   font-weight:bold;
@@ -95,19 +100,15 @@ h3{
 }
 
 .card{
-  background:#fff;
+  background:white;
   border:1px solid #e5e5e5;
   border-radius:10px;
   padding:20px;
 }
 
-.card h4{
-  margin-top:0;
-}
-
 .dark{
   background:#000;
-  color:#fff;
+  color:white;
   padding:30px;
   border-radius:12px;
   margin-bottom:20px;
@@ -124,17 +125,21 @@ input,select,textarea{
   border:1px solid #ccc;
   font-size:16px;
   width:100%;
-  box-sizing:border-box;
 }
 
 textarea{
   min-height:120px;
 }
 
+input[type="file"]{
+  background:#fff;
+  padding:10px;
+}
+
 button{
   padding:14px;
-  background:#000;
-  color:#fff;
+  background:black;
+  color:white;
   border:none;
   border-radius:6px;
   font-size:16px;
@@ -144,7 +149,7 @@ button{
 
 footer{
   background:#000;
-  color:#fff;
+  color:white;
   text-align:center;
   padding:30px;
   margin-top:40px;
@@ -169,18 +174,6 @@ footer{
 }
 
 @media (max-width:700px){
-  header h1{
-    font-size:28px;
-  }
-
-  header p{
-    font-size:16px;
-  }
-
-  .hero h2{
-    font-size:32px;
-  }
-
   .mobile-call{
     display:block;
     position:fixed;
@@ -192,12 +185,12 @@ footer{
     padding:14px 18px;
     border-radius:999px;
     font-weight:700;
-    box-shadow:0 8px 18px rgba(0,0,0,0.18);
     z-index:1100;
+    box-shadow:0 8px 18px rgba(0,0,0,0.18);
   }
 
-  body{
-    padding-bottom:70px;
+  .hero h2{
+    font-size:32px;
   }
 }
 </style>
@@ -214,7 +207,6 @@ footer{
   <a href="#about">About</a>
   <a href="#services">Services</a>
   <a href="#projects">Projects</a>
-  <a href="#area">Service Area</a>
   <a href="#project">Start Your Project</a>
   <a href="#contact">Contact</a>
 </nav>
@@ -256,35 +248,22 @@ footer{
   <h3>Construction Services</h3>
 
   <div class="grid">
-    <div class="card"><h4>New Home Construction</h4><p>Start-to-finish residential home construction.</p></div>
-    <div class="card"><h4>Roof Replacement</h4><p>Full residential roof replacement services.</p></div>
-    <div class="card"><h4>Deck Construction</h4><p>Custom deck construction.</p></div>
-    <div class="card"><h4>Home Additions</h4><p>Professionally managed additions.</p></div>
-    <div class="card"><h4>Windows & Doors</h4><p>Installation and replacement services.</p></div>
-    <div class="card"><h4>Siding</h4><p>Exterior siding installation.</p></div>
-    <div class="card"><h4>Driveways</h4><p>Driveway and access improvements.</p></div>
-    <div class="card"><h4>Fencing & Rural Projects</h4><p>Livestock fencing and rural property improvements.</p></div>
+    <div class="card"><h4>New Home Construction</h4></div>
+    <div class="card"><h4>Roof Replacement</h4></div>
+    <div class="card"><h4>Deck Construction</h4></div>
+    <div class="card"><h4>Home Additions</h4></div>
+    <div class="card"><h4>Windows & Doors</h4></div>
+    <div class="card"><h4>Siding</h4></div>
+    <div class="card"><h4>Driveways</h4></div>
+    <div class="card"><h4>Fencing & Rural Projects</h4></div>
   </div>
 </section>
 
 <section id="projects">
   <h3>Projects</h3>
   <div class="card">
-    <p>Completed and current construction projects will be featured here.</p>
-    <p><strong>Project gallery coming soon.</strong></p>
+    Project gallery coming soon.
   </div>
-</section>
-
-<section id="area">
-  <h3>Service Area</h3>
-  <ul>
-    <li>Byron, Michigan</li>
-    <li>Owosso</li>
-    <li>Howell</li>
-    <li>Fowlerville</li>
-    <li>Shiawassee County</li>
-    <li>Livingston County</li>
-  </ul>
 </section>
 
 <section id="project">
@@ -299,15 +278,25 @@ footer{
     <strong>Thank you!</strong> Your project request has been submitted.
   </div>
 
-  <form id="projectForm" action="https://api.web3forms.com/submit" method="POST">
-    <input type="hidden" name="access_key" value="a37d190c-b4a6-4df2-9602-c8e39a650400">
-    <input type="hidden" name="subject" value="New Project Request – S9 Services LLC">
-    <input type="hidden" name="from_name" value="S9 Services LLC Website">
-    <input type="hidden" name="redirect" value="https://s9services.com/#project">
+  <form id="projectForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+
+    <input type="hidden" name="access_key" value="YOUR_PROJECTS_EMAIL_ACCESS_KEY">
+    <input type="hidden" name="from_name" value="S9 Services LLC">
+    <input type="hidden" name="replyto" value="Email">
+    <input type="hidden" name="autoresponse" value="Thank you for contacting S9 Services LLC.
+
+We received your project request and will review the details. Someone from our team will follow up soon.
+
+If your request is urgent please call or text 616-302-7699.">
+
+    <input type="text" id="projectTitle" name="Project Title" placeholder="Project Title (Example: New Deck Build)" required>
 
     <input type="text" name="Name" placeholder="Full Name" required>
+
     <input type="tel" name="Phone" placeholder="Phone Number" required>
+
     <input type="email" name="Email" placeholder="Email Address" required>
+
     <input type="text" name="Project Address" placeholder="Project Address / City">
 
     <select name="Project Type">
@@ -323,34 +312,15 @@ footer{
       <option>Other</option>
     </select>
 
-    <select name="Project Timeline">
-      <option value="">Project Timeline</option>
-      <option>ASAP</option>
-      <option>1–3 months</option>
-      <option>3–6 months</option>
-      <option>Planning stage</option>
-    </select>
-
-    <select name="Estimated Budget">
-      <option value="">Estimated Budget</option>
-      <option>Under $5,000</option>
-      <option>$5,000 – $15,000</option>
-      <option>$15,000 – $50,000</option>
-      <option>$50,000 – $150,000</option>
-      <option>$150,000+</option>
-    </select>
-
-    <select name="Preferred Contact Method">
-      <option value="">Preferred Contact Method</option>
-      <option>Call</option>
-      <option>Text</option>
-      <option>Email</option>
-    </select>
-
     <textarea name="Project Description" placeholder="Describe the project"></textarea>
 
+    <div>
+      <label for="attachment"><strong>Upload Photos or PDF</strong></label>
+      <input type="file" id="attachment" name="attachment" accept="image/*,.pdf">
+      <p class="note">Attach one photo or PDF. Keep the file under 5 MB.</p>
+    </div>
+
     <button type="submit">Start My Project</button>
-    <p class="note">Project requests are sent to projects@s9services.com.</p>
   </form>
 </section>
 
@@ -364,13 +334,13 @@ footer{
     </div>
 
     <div class="card">
-      <h4>Email</h4>
+      <h4>General Information</h4>
       <p>S9Servicesllc@gmail.com</p>
     </div>
 
     <div class="card">
-      <h4>Location</h4>
-      <p>Byron, Michigan</p>
+      <h4>Project Requests</h4>
+      <p>projects@s9services.com</p>
     </div>
   </div>
 </section>
@@ -378,31 +348,41 @@ footer{
 <footer>
   <p><strong>S9 Services LLC</strong></p>
   <p>Residential Construction & Development</p>
-  <p>Serving Shiawassee County, Livingston County, and surrounding communities.</p>
-  <p>General Information: S9Servicesllc@gmail.com</p>
-  <p>Project Requests: projects@s9services.com</p>
+  <p>Serving Shiawassee County, Livingston County and surrounding communities.</p>
 </footer>
 
-<a class="mobile-call" href="tel:6163027699">Call or Text</a>
+<a class="mobile-call" href="tel:6163027699">Call</a>
 
 <script>
 const form = document.getElementById("projectForm");
-const successMessage = document.getElementById("successMessage");
+const success = document.getElementById("successMessage");
+const projectTitle = document.getElementById("projectTitle");
 
-form.addEventListener("submit", async function(e) {
+form.addEventListener("submit", async function(e){
   e.preventDefault();
 
   const formData = new FormData(form);
+
+  formData.append("subject", "New Project Request – " + projectTitle.value + " – S9 Services LLC");
+
+  const fileInput = document.getElementById("attachment");
+  if (fileInput.files.length > 0) {
+    const fileSizeKB = fileInput.files[0].size / 1024;
+    if (fileSizeKB > 5000) {
+      alert("Please upload a file smaller than 5 MB.");
+      return;
+    }
+  }
 
   const response = await fetch(form.action, {
     method: "POST",
     body: formData
   });
 
-  if (response.ok) {
-    successMessage.style.display = "block";
+  if(response.ok){
+    success.style.display = "block";
     form.reset();
-    successMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+    success.scrollIntoView({behavior:"smooth"});
   } else {
     alert("Something went wrong. Please try again or call/text 616-302-7699.");
   }
