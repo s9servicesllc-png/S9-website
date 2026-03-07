@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://s9services.com/sitemap.xml
