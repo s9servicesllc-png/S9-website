@@ -12,15 +12,13 @@
       --navy-2: #132656;
       --black: #111111;
       --gold: #d4af37;
-      --gold-soft: #f2df9b;
       --white: #ffffff;
       --off-white: #f7f7f9;
       --gray: #5b6473;
       --line: rgba(13, 27, 61, 0.12);
-      --shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
-      --radius: 22px;
-      --radius-sm: 14px;
-      --max: 1180px;
+      --radius: 18px;
+      --shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      --max: 1120px;
     }* { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -32,7 +30,6 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
 
 .container {
   width: min(calc(100% - 2rem), var(--max));
@@ -46,16 +43,9 @@ img { max-width: 100%; display: block; }
 }
 
 .topbar-inner {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
-  align-items: center;
-  justify-content: center;
-  padding: 0.7rem 0;
+  padding: 0.75rem 0;
   text-align: center;
 }
-
-.topbar a { color: var(--gold-soft); font-weight: 700; }
 
 header {
   position: sticky;
@@ -75,99 +65,50 @@ header {
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  min-width: 0;
-}
-
-.brand-mark {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--navy), var(--navy-2));
-  color: var(--white);
-  display: grid;
-  place-items: center;
-  font-size: 1.4rem;
-  font-weight: 800;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(255,255,255,0.18);
-}
-
-.brand-text {
-  min-width: 0;
-}
-
-.brand-text strong {
-  display: block;
   color: var(--navy);
-  font-size: 1rem;
-  letter-spacing: 0.02em;
+  min-width: 0;
 }
 
-.brand-text span {
+.brand strong {
+  display: block;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.brand span {
+  display: block;
   color: var(--gray);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  gap: 1rem;
 }
 
-.nav-links a {
-  font-weight: 600;
+.nav-links a,
+.nav-links button {
   color: var(--navy);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  padding: 0.95rem 1.35rem;
-  border-radius: 999px;
-  font-weight: 800;
-  border: 2px solid transparent;
-  transition: 0.2s ease;
-  cursor: pointer;
-}
-
-.btn:hover { transform: translateY(-1px); }
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--gold), #c79618);
-  color: var(--black);
-  box-shadow: var(--shadow);
-}
-
-.btn-dark {
-  background: var(--navy);
-  color: var(--white);
-}
-
-.btn-light {
-  background: var(--white);
-  color: var(--navy);
-  border-color: rgba(13, 27, 61, 0.15);
-}
-
-.btn-outline {
   background: transparent;
-  color: var(--white);
-  border-color: rgba(255,255,255,0.35);
+  border: none;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-links button:hover,
+.nav-links a:hover,
+.text-link:hover {
+  color: var(--gold);
 }
 
 .hero {
-  background:
-    radial-gradient(circle at top right, rgba(212, 175, 55, 0.18), transparent 26%),
-    linear-gradient(135deg, var(--navy), #081127 70%);
+  background: linear-gradient(135deg, var(--navy), #081127 70%);
   color: var(--white);
-  padding: 4.75rem 0 3.5rem;
+  padding: 4rem 0 3rem;
 }
 
 .hero-grid {
@@ -178,89 +119,79 @@ header {
 }
 
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--gold);
   font-weight: 700;
-  color: var(--gold-soft);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
   margin-bottom: 1rem;
+  display: inline-block;
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 5vw, 4.25rem);
+  font-size: clamp(2.1rem, 5vw, 4rem);
   line-height: 1.08;
   margin: 0 0 1rem;
-  max-width: 12ch;
+  max-width: 11ch;
 }
 
 .hero p {
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   color: rgba(255,255,255,0.88);
-  max-width: 60ch;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1rem;
+  max-width: 56ch;
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-bottom: 1.5rem;
+.hero-note {
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
 }
 
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-}
-
-.badge {
-  padding: 0.55rem 0.9rem;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.25rem;
   border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: #f4f4f8;
   font-weight: 700;
-  font-size: 0.92rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
-.hero-card {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), #c79618);
+  color: var(--black);
   box-shadow: var(--shadow);
 }
 
-.hero-card h3 {
-  margin-top: 0;
-  margin-bottom: 0.8rem;
-  font-size: 1.2rem;
+.hero-card,
+.simple-card,
+.form-wrap,
+.contact-card,
+.gallery-box {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  box-shadow: var(--shadow);
 }
 
-.hero-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.25rem;
-}
-
-.hero-list li {
-  padding: 0.65rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+.hero-card {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.12);
+  color: var(--white);
+  box-shadow: none;
 }
 
 section {
-  padding: 4.5rem 0;
+  padding: 4rem 0;
 }
 
 .section-head {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   max-width: 760px;
 }
 
@@ -275,7 +206,7 @@ section {
 }
 
 .section-head h2 {
-  font-size: clamp(1.9rem, 3vw, 3rem);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
   line-height: 1.15;
   margin: 0 0 0.75rem;
   color: var(--navy);
@@ -284,151 +215,32 @@ section {
 .section-head p {
   margin: 0;
   color: var(--gray);
-  font-size: 1.03rem;
+  font-size: 1rem;
 }
 
-.services-grid,
-.why-grid,
-.areas-grid,
-.forms-grid,
-.contact-grid,
-.about-grid,
-.process-grid {
+.services-list {
   display: grid;
-  gap: 1.2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
 }
 
-.services-grid {
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.4rem;
-  box-shadow: var(--shadow);
-}
-
-.service-card h3,
-.why-card h3,
-.contact-card h3,
-.form-card h3,
-.process-card h3 {
-  margin-top: 0;
+.services-list div {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--line);
   color: var(--navy);
-}
-
-.service-icon,
-.why-icon,
-.process-number {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 0.95rem;
-  font-weight: 800;
-}
-
-.service-icon,
-.process-number {
-  background: rgba(212, 175, 55, 0.14);
-  color: var(--navy);
-}
-
-.insurance {
-  background: linear-gradient(180deg, #faf6e8, #fff);
-  border-top: 1px solid rgba(212,175,55,0.25);
-  border-bottom: 1px solid rgba(212,175,55,0.25);
-}
-
-.insurance-wrap {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.insurance-points {
-  display: grid;
-  gap: 0.9rem;
-  margin: 1.5rem 0;
-}
-
-.point {
-  background: var(--white);
-  border: 1px solid rgba(13,27,61,0.08);
-  border-radius: 16px;
-  padding: 1rem 1rem;
-  box-shadow: var(--shadow);
-  font-weight: 600;
-  color: var(--navy);
-}
-
-.why-grid {
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.why-card { padding: 1.35rem; }
-
-.why-icon {
-  background: rgba(13, 27, 61, 0.08);
-  color: var(--navy);
-}
-
-.about-grid {
-  grid-template-columns: 1fr 1fr;
-  align-items: stretch;
-}
-
-.about-panel {
-  background: var(--navy);
-  color: var(--white);
-  border-radius: var(--radius);
-  padding: 2rem;
-  box-shadow: var(--shadow);
-}
-
-.about-panel h3 { margin-top: 0; }
-.about-panel p { color: rgba(255,255,255,0.88); }
-
-.areas-grid {
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.area-card {
-  text-align: center;
-  font-weight: 800;
-  color: var(--navy);
-}
-
-.process-grid {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.process-card {
+  font-weight: 700;
   background: var(--off-white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.35rem;
+  border-radius: 14px;
+}
+
+.about-text {
+  max-width: 760px;
+  color: var(--gray);
+  font-size: 1.02rem;
 }
 
 .forms-section {
-  background: linear-gradient(180deg, var(--off-white), #fff);
-}
-
-.forms-grid {
-  grid-template-columns: 1fr 1fr;
-  align-items: start;
-}
-
-.form-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
+  background: var(--off-white);
 }
 
 form {
@@ -462,105 +274,119 @@ input, select, textarea {
 }
 
 textarea { min-height: 140px; resize: vertical; }
+
 input:focus, select:focus, textarea:focus {
   outline: 2px solid rgba(212, 175, 55, 0.35);
   border-color: var(--gold);
 }
 
-.form-note {
-  color: var(--gray);
-  font-size: 0.92rem;
-  margin-top: 0.5rem;
-}
-
 .status {
   font-weight: 700;
-  margin-top: 0.35rem;
   min-height: 1.25rem;
   color: var(--navy);
 }
 
-.contact-grid {
-  grid-template-columns: 1fr 1fr;
-  align-items: start;
-}
-
-.contact-card p,
-.footer p { margin: 0.35rem 0; }
-
-.contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-top: 1.1rem;
-}
-
-.cta {
-  background: linear-gradient(135deg, var(--navy), #091327 70%);
-  color: var(--white);
+.gallery-box {
   text-align: center;
-  border-radius: var(--radius);
-  padding: 2.4rem 1.4rem;
-  box-shadow: var(--shadow);
+  color: var(--navy);
+  font-weight: 700;
+  background: var(--off-white);
+  box-shadow: none;
 }
 
-.cta h2 {
-  margin-top: 0;
-  margin-bottom: 0.75rem;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+.contact-card p {
+  margin: 0.4rem 0;
+  color: var(--gray);
 }
 
-.cta p {
-  color: rgba(255,255,255,0.88);
-  max-width: 720px;
-  margin: 0 auto 1.4rem;
+.contact-card strong {
+  color: var(--navy);
+}
+
+.text-link {
+  color: var(--navy);
+  font-weight: 600;
 }
 
 footer {
   background: var(--black);
   color: rgba(255,255,255,0.88);
-  padding: 2.25rem 0;
-  margin-top: 4rem;
+  padding: 2rem 0;
+  margin-top: 3rem;
 }
 
 .footer {
-  display: grid;
-  gap: 0.8rem;
   text-align: center;
 }
 
 .footer strong { color: var(--white); }
-.footer a { color: var(--gold-soft); }
+.footer a { color: #f2df9b; }
 
-@media (max-width: 1100px) {
-  .services-grid,
-  .why-grid,
-  .areas-grid { grid-template-columns: repeat(2, 1fr); }
-  .process-grid { grid-template-columns: repeat(2, 1fr); }
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: #fff;
+  color: var(--black);
+  border-radius: var(--radius);
+  width: min(100%, 760px);
+  max-height: 90vh;
+  overflow: auto;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--navy);
+}
+
+@media (max-width: 900px) {
   .hero-grid,
-  .insurance-wrap,
-  .about-grid,
-  .forms-grid,
-  .contact-grid { grid-template-columns: 1fr; }
+  .grid-2,
+  .services-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 760px) {
-  .nav { align-items: flex-start; }
-  .nav-links {
-    width: 100%;
-    justify-content: flex-start;
-    gap: 0.7rem 1rem;
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .grid-2,
-  .services-grid,
-  .why-grid,
-  .areas-grid,
-  .process-grid { grid-template-columns: 1fr; }
-  .hero { padding-top: 3.5rem; }
-  section { padding: 3.5rem 0; }
-  .btn { width: 100%; }
-  .hero-actions,
-  .contact-actions { flex-direction: column; }
+
+  .nav-links {
+    gap: 0.75rem 1rem;
+  }
+
+  .hero {
+    padding: 3rem 0 2.5rem;
+  }
+
+  section {
+    padding: 3rem 0;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }
 
   </style>
@@ -568,26 +394,20 @@ footer {
 <body>
   <div class="topbar">
     <div class="container topbar-inner">
-      <span>Call / Text <a href="tel:16163027699">616-302-7699</a></span>
-      <span>Project Requests <a href="mailto:projects@s9services.com">projects@s9services.com</a></span>
-      <span>Questions <a href="mailto:S9Servicesllc@gmail.com">S9Servicesllc@gmail.com</a></span>
+      S9 Services Roofing, Siding, Windows &amp; Doors serving Livingston, Shiawassee, Genesee, Oakland &amp; Ingham Counties
     </div>
   </div>  <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="S9 Services home">
-        <img src="/logo.png" alt="S9 Services LLC logo" style="width:60px;height:auto;" />
-        <div class="brand-text">
-          <strong>S9 Services LLC</strong>
-          <span>Roofing • Siding • Windows • Doors</span>
-        </div>
+        <strong>S9 Services</strong>
+        <span>Roofing • Siding • Windows • Doors</span>
       </a><nav class="nav-links" aria-label="Primary">
     <a href="#services">Services</a>
-    <a href="#claims">Insurance Claims</a>
-    <a href="#areas">Service Areas</a>
-    <a href="#about">About</a>
+    <a href="#about">About Us</a>
+    <a href="#project-form">Project Request</a>
+    <a href="#gallery">Gallery Coming Soon</a>
     <a href="#contact">Contact</a>
-    <a class="btn btn-light" href="#project-form">Request Project</a>
-    <a class="btn btn-dark" href="tel:16163027699">Call / Text Now</a>
+    <button type="button" id="openInsuranceModal">Insurance Form</button>
   </nav>
 </div>
 
@@ -595,32 +415,14 @@ footer {
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Serving Byron, MI and surrounding counties</div>
+          <div class="eyebrow">Roofing and exterior services</div>
           <h1>Roofing, Siding, Windows &amp; Doors — Exterior Services You Can Count On</h1>
-          <p>
-            S9 Services LLC helps homeowners with roofing and exterior projects while making storm damage and insurance claim support easier to understand from the very first call.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#project-form">Request a Project</a>
-            <a class="btn btn-outline" href="sms:16163027699">Text 616-302-7699</a>
-          </div>
-          <div class="hero-badges">
-            <span class="badge">Roofing</span>
-            <span class="badge">Siding</span>
-            <span class="badge">Windows</span>
-            <span class="badge">Doors</span>
-            <span class="badge">Storm Damage Help</span>
-            <span class="badge">Insurance Claim Support</span>
-          </div>
-        </div><aside class="hero-card" aria-label="Quick contact details">
-      <h3>Need help right away?</h3>
-      <ul class="hero-list">
-        <li><span>Call / Text</span><strong>616-302-7699</strong></li>
-        <li><span>Project Requests</span><strong>projects@s9services.com</strong></li>
-        <li><span>Questions / Info</span><strong>S9Servicesllc@gmail.com</strong></li>
-        <li><span>Service Area</span><strong>Mid-Michigan</strong></li>
-      </ul>
-      <a class="btn btn-primary" href="#claims-form">Insurance Claim Help</a>
+          <p>S9 Services LLC helps homeowners with roofing and exterior projects while making storm damage and insurance claim support easier to understand from the very first call.</p>
+          <p class="hero-note">Simple. Clear. Easy to use on desktop and phone.</p>
+          <a class="btn btn-primary" href="#project-form">Request a Project</a>
+        </div><aside class="hero-card" aria-label="Quick overview">
+      <h3>Serving homeowners across Mid-Michigan</h3>
+      <p>Roofing, siding, windows, doors, and help with exterior insurance claims — with a simple process and clear next steps.</p>
     </aside>
   </div>
 </section>
@@ -629,169 +431,29 @@ footer {
   <div class="container">
     <div class="section-head">
       <span class="kicker">Services</span>
-      <h2>Exterior Services for Your Home</h2>
-      <p>Whether you need repairs, replacements, or help after storm damage, S9 Services provides dependable exterior work focused on protecting and improving your home.</p>
+      <h2>Services</h2>
+      <p>Simple exterior services for homeowners who need repairs, replacements, or storm damage help.</p>
     </div>
 
-    <div class="services-grid">
-      <article class="card service-card">
-        <div class="service-icon">01</div>
-        <h3>Roofing</h3>
-        <p>Roofing services designed to protect your home, improve durability, and stand up to Michigan weather.</p>
-      </article>
-      <article class="card service-card">
-        <div class="service-icon">02</div>
-        <h3>Siding</h3>
-        <p>Siding solutions that improve curb appeal while adding exterior protection and long-term value.</p>
-      </article>
-      <article class="card service-card">
-        <div class="service-icon">03</div>
-        <h3>Windows</h3>
-        <p>Window replacements that improve comfort, efficiency, and the overall look of your home.</p>
-      </article>
-      <article class="card service-card">
-        <div class="service-icon">04</div>
-        <h3>Doors</h3>
-        <p>Exterior door services that enhance security, style, and day-to-day performance.</p>
-      </article>
-      <article class="card service-card">
-        <div class="service-icon">05</div>
-        <h3>Storm Damage</h3>
-        <p>Support for homeowners dealing with exterior storm damage and insurance-related repair needs.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="insurance" id="claims">
-  <div class="container insurance-wrap">
-    <div>
-      <div class="section-head">
-        <span class="kicker">Insurance Claims</span>
-        <h2>Help With Exterior Insurance Claims</h2>
-        <p>Storm damage can leave homeowners unsure where to start. S9 Services helps simplify the process by supporting roofing, siding, windows, and doors projects tied to exterior damage.</p>
-      </div>
-
-      <div class="insurance-points">
-        <div class="point">Help identifying possible exterior storm damage</div>
-        <div class="point">Guidance on what information to gather</div>
-        <div class="point">Clear communication about next steps</div>
-        <div class="point">Project support from first contact forward</div>
-      </div>
-
-      <div class="hero-actions">
-        <a class="btn btn-dark" href="#claims-form">Start an Insurance Request</a>
-        <a class="btn btn-light" href="tel:16163027699">Call / Text for Help</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Think your home has hail or wind damage?</h3>
-      <p>If your roof, siding, windows, or doors may have been affected by a storm, reach out and we’ll help you take the next step with confidence.</p>
-      <p><strong>Email for claims:</strong><br><a href="mailto:projects@s9services.com">projects@s9services.com</a></p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="section-head">
-      <span class="kicker">Why Choose S9</span>
-      <h2>Built to Be Clear, Fast, and Helpful</h2>
-      <p>We want customers to find what they need quickly, understand their next step, and feel confident reaching out.</p>
-    </div>
-
-    <div class="why-grid">
-      <article class="card why-card">
-        <div class="why-icon">A</div>
-        <h3>Focused Exterior Expertise</h3>
-        <p>We specialize in roofing, siding, windows, and doors so your project gets the attention it deserves.</p>
-      </article>
-      <article class="card why-card">
-        <div class="why-icon">B</div>
-        <h3>Insurance Claim Support</h3>
-        <p>We take pride in helping homeowners understand the process when exterior storm damage is involved.</p>
-      </article>
-      <article class="card why-card">
-        <div class="why-icon">C</div>
-        <h3>Fast Contact Options</h3>
-        <p>Call, text, email, or submit a form online to get the help you need without delay.</p>
-      </article>
-      <article class="card why-card">
-        <div class="why-icon">D</div>
-        <h3>Clear Next Steps</h3>
-        <p>We want homeowners to know exactly what to do, what to expect, and how to move forward.</p>
-      </article>
-      <article class="card why-card">
-        <div class="why-icon">E</div>
-        <h3>User-Friendly Experience</h3>
-        <p>Everything is designed to help visitors get to the right information right away.</p>
-      </article>
+    <div class="services-list">
+      <div>Roofing</div>
+      <div>Siding</div>
+      <div>Windows</div>
+      <div>Doors</div>
+      <div>Storm Damage Help</div>
+      <div>Insurance Claim Support</div>
     </div>
   </div>
 </section>
 
 <section id="about">
-  <div class="container about-grid">
-    <div class="section-head">
-      <span class="kicker">About</span>
-      <h2>About S9 Services</h2>
-      <p>S9 Services LLC is based in Byron, Michigan and serves homeowners who need reliable roofing and exterior services. The company is operated by Sarah and Nick with a strong commitment to helping customers protect their homes and navigate exterior projects with confidence.</p>
-      <p>S9 Services specializes in roofing, siding, windows, and doors, and takes particular pride in helping customers dealing with storm damage and insurance-related exterior work.</p>
-    </div>
-    <div class="about-panel">
-      <h3>What customers can expect</h3>
-      <p>Responsive communication, a straightforward process, and a website built to make it easy to request a project, ask questions, or get help with an insurance-related exterior issue.</p>
-      <a class="btn btn-primary" href="#contact">Contact S9 Services</a>
-    </div>
-  </div>
-</section>
-
-<section id="areas">
   <div class="container">
     <div class="section-head">
-      <span class="kicker">Service Areas</span>
-      <h2>Areas We Serve</h2>
-      <p>S9 Services works with homeowners throughout these counties.</p>
+      <span class="kicker">About Us</span>
+      <h2>About Us</h2>
     </div>
-    <div class="areas-grid">
-      <div class="card area-card">Livingston County</div>
-      <div class="card area-card">Shiawassee County</div>
-      <div class="card area-card">Genesee County</div>
-      <div class="card area-card">Oakland County</div>
-      <div class="card area-card">Ingham County</div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="section-head">
-      <span class="kicker">Process</span>
-      <h2>A Simple Process</h2>
-      <p>From first contact to next steps, everything is meant to be easy to follow.</p>
-    </div>
-    <div class="process-grid">
-      <article class="process-card">
-        <div class="process-number">1</div>
-        <h3>Reach Out</h3>
-        <p>Call, text, email, or fill out a form online.</p>
-      </article>
-      <article class="process-card">
-        <div class="process-number">2</div>
-        <h3>Tell Us What You Need</h3>
-        <p>Share whether you need roofing, siding, windows, doors, or storm damage help.</p>
-      </article>
-      <article class="process-card">
-        <div class="process-number">3</div>
-        <h3>Review Details</h3>
-        <p>We review the information and help guide the next step clearly.</p>
-      </article>
-      <article class="process-card">
-        <div class="process-number">4</div>
-        <h3>Move Forward</h3>
-        <p>From exterior projects to insurance-related work, we help make the process easier to act on.</p>
-      </article>
+    <div class="simple-card about-text">
+      S9 Services provides roofing, siding, windows, and doors for homeowners across Mid-Michigan. We also help homeowners understand the next step when exterior storm damage and insurance claims are involved.
     </div>
   </div>
 </section>
@@ -799,211 +461,174 @@ footer {
 <section class="forms-section">
   <div class="container">
     <div class="section-head">
-      <span class="kicker">Forms</span>
-      <h2>Get Started Now</h2>
-      <p>Choose the form that fits your situation and we’ll follow up as soon as possible.</p>
+      <span class="kicker">Project Request</span>
+      <h2>Project Request</h2>
+      <p>Tell us what you need and we’ll follow up as soon as possible.</p>
     </div>
 
-    <div class="forms-grid">
-      <article class="form-card" id="project-form">
-        <h3>Project Request Form</h3>
-        <p>For quotes, repair requests, replacements, and general exterior project needs.</p>
+    <div class="form-wrap" id="project-form">
+      <form class="web3form" data-form-name="Project Request">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+        <input type="hidden" name="subject" value="New S9 Services Project Request" />
+        <input type="hidden" name="from_name" value="S9 Services Website" />
+        <input type="hidden" name="redirect" value="" />
+        <input type="checkbox" name="botcheck" style="display:none" />
 
-        <form class="web3form" data-form-name="Project Request">
-          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-          <input type="hidden" name="subject" value="New S9 Services Project Request" />
-          <input type="hidden" name="from_name" value="S9 Services Website" />
-          <input type="hidden" name="redirect" value="" />
-          <input type="checkbox" name="botcheck" style="display:none" />
-
-          <div class="grid-2">
-            <label>Full Name
-              <input type="text" name="name" required />
-            </label>
-            <label>Phone Number
-              <input type="tel" name="phone" required />
-            </label>
-          </div>
-
-          <div class="grid-2">
-            <label>Email Address
-              <input type="email" name="email" required />
-            </label>
-            <label>Property Address
-              <input type="text" name="property_address" required />
-            </label>
-          </div>
-
-          <div class="grid-2">
-            <label>Service Needed
-              <select name="service_needed" required>
-                <option value="">Select one</option>
-                <option>Roofing</option>
-                <option>Siding</option>
-                <option>Windows</option>
-                <option>Doors</option>
-                <option>Other</option>
-              </select>
-            </label>
-            <label>Preferred Contact Method
-              <select name="preferred_contact" required>
-                <option value="">Select one</option>
-                <option>Call</option>
-                <option>Text</option>
-                <option>Email</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="grid-2">
-            <label>Best Time to Contact
-              <input type="text" name="best_time_to_contact" placeholder="Morning, afternoon, evenings..." />
-            </label>
-            <label>Send To
-              <input type="text" value="projects@s9services.com" disabled />
-            </label>
-          </div>
-
-          <label>Project Description
-            <textarea name="message" required placeholder="Tell us about the project and what help you need."></textarea>
+        <div class="grid-2">
+          <label>Full Name
+            <input type="text" name="name" required />
           </label>
-
-          <button class="btn btn-primary" type="submit">Request My Project</button>
-          <div class="status" aria-live="polite"></div>
-          <p class="form-note">Replace <strong>YOUR_WEB3FORMS_ACCESS_KEY</strong> with your real Web3Forms key. This form is set up to send project requests to <strong>projects@s9services.com</strong>.</p>
-        </form>
-      </article>
-
-      <article class="form-card" id="claims-form">
-        <h3>Insurance / Storm Damage Form</h3>
-        <p>For homeowners who may have exterior storm damage and need help getting started.</p>
-
-        <form class="web3form" data-form-name="Insurance Claim Request">
-          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-          <input type="hidden" name="subject" value="New S9 Services Insurance / Storm Damage Request" />
-          <input type="hidden" name="from_name" value="S9 Services Website" />
-          <input type="hidden" name="redirect" value="" />
-          <input type="checkbox" name="botcheck" style="display:none" />
-
-          <div class="grid-2">
-            <label>Full Name
-              <input type="text" name="name" required />
-            </label>
-            <label>Phone Number
-              <input type="tel" name="phone" required />
-            </label>
-          </div>
-
-          <div class="grid-2">
-            <label>Email Address
-              <input type="email" name="email" required />
-            </label>
-            <label>Property Address
-              <input type="text" name="property_address" required />
-            </label>
-          </div>
-
-          <div class="grid-2">
-            <label>Type of Damage
-              <select name="damage_type" required>
-                <option value="">Select one</option>
-                <option>Roofing</option>
-                <option>Siding</option>
-                <option>Windows</option>
-                <option>Doors</option>
-                <option>Hail</option>
-                <option>Wind</option>
-                <option>Other</option>
-              </select>
-            </label>
-            <label>Has a claim been filed?
-              <select name="claim_filed" required>
-                <option value="">Select one</option>
-                <option>Yes</option>
-                <option>No</option>
-                <option>Not Yet</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="grid-2">
-            <label>Insurance Company
-              <input type="text" name="insurance_company" />
-            </label>
-            <label>Preferred Contact Method
-              <select name="preferred_contact" required>
-                <option value="">Select one</option>
-                <option>Call</option>
-                <option>Text</option>
-                <option>Email</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="grid-2">
-            <label>Best Time to Contact
-              <input type="text" name="best_time_to_contact" placeholder="Morning, afternoon, evenings..." />
-            </label>
-            <label>Send To
-              <input type="text" value="projects@s9services.com" disabled />
-            </label>
-          </div>
-
-          <label>Damage Description
-            <textarea name="message" required placeholder="Tell us what happened and what damage you think may be present."></textarea>
+          <label>Phone Number
+            <input type="tel" name="phone" required />
           </label>
+        </div>
 
-          <button class="btn btn-primary" type="submit">Get Help With My Claim</button>
-          <div class="status" aria-live="polite"></div>
-          <p class="form-note">This form is also routed to <strong>projects@s9services.com</strong>. Use your Web3Forms dashboard settings so submissions deliver to that inbox.</p>
-        </form>
-      </article>
+        <div class="grid-2">
+          <label>Email Address
+            <input type="email" name="email" required />
+          </label>
+          <label>Property Address
+            <input type="text" name="property_address" required />
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <label>Service Needed
+            <select name="service_needed" required>
+              <option value="">Select one</option>
+              <option>Roofing</option>
+              <option>Siding</option>
+              <option>Windows</option>
+              <option>Doors</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Preferred Contact Method
+            <select name="preferred_contact" required>
+              <option value="">Select one</option>
+              <option>Call</option>
+              <option>Text</option>
+              <option>Email</option>
+            </select>
+          </label>
+        </div>
+
+        <label>Project Description
+          <textarea name="message" required placeholder="Tell us about the project and what help you need."></textarea>
+        </label>
+
+        <button class="btn btn-primary" type="submit">Request My Project</button>
+        <div class="status" aria-live="polite"></div>
+      </form>
     </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Gallery</span>
+      <h2>Gallery Coming Soon</h2>
+      <p>Project photos and completed exterior work will be added here soon.</p>
+    </div>
+    <div class="gallery-box">Gallery coming soon</div>
   </div>
 </section>
 
 <section id="contact">
-  <div class="container contact-grid">
+  <div class="container">
     <div class="section-head">
       <span class="kicker">Contact</span>
-      <h2>Contact S9 Services</h2>
-      <p>Need roofing or exterior help? Reach out using the contact option that works best for you.</p>
+      <h2>Contact</h2>
+      <p>Reach out using the contact option that works best for you.</p>
     </div>
 
-    <div class="card contact-card">
-      <h3>Direct Contact Information</h3>
-      <p><strong>Project Requests:</strong> <a href="mailto:projects@s9services.com">projects@s9services.com</a></p>
-      <p><strong>Questions / Information:</strong> <a href="mailto:S9Servicesllc@gmail.com">S9Servicesllc@gmail.com</a></p>
-      <p><strong>Call / Text:</strong> <a href="tel:16163027699">616-302-7699</a></p>
-      <div class="contact-actions">
-        <a class="btn btn-dark" href="tel:16163027699">Call Now</a>
-        <a class="btn btn-primary" href="sms:16163027699">Text Now</a>
-        <a class="btn btn-light" href="mailto:projects@s9services.com">Email Project Requests</a>
-        <a class="btn btn-light" href="mailto:S9Servicesllc@gmail.com">Email Questions</a>
-      </div>
+    <div class="contact-card">
+      <p><strong>Project Requests:</strong> <a class="text-link" href="mailto:projects@s9services.com">projects@s9services.com</a></p>
+      <p><strong>Questions / Information:</strong> <a class="text-link" href="mailto:S9Servicesllc@gmail.com">S9Servicesllc@gmail.com</a></p>
+      <p><strong>Call / Text:</strong> <a class="text-link" href="tel:16163027699">616-302-7699</a></p>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="container">
-    <div class="cta">
-      <h2>Need Roofing or Exterior Help?</h2>
-      <p>Contact S9 Services today for roofing, siding, windows, doors, and storm damage support that helps you move forward quickly.</p>
-      <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
-        <a class="btn btn-primary" href="#project-form">Request Project</a>
-        <a class="btn btn-outline" href="tel:16163027699">Call / Text 616-302-7699</a>
-      </div>
+  </main>  <div class="modal-overlay" id="insuranceModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="insuranceModalTitle">
+      <button class="modal-close" type="button" id="closeInsuranceModal" aria-label="Close insurance form">×</button>
+      <h3 id="insuranceModalTitle">Insurance / Storm Damage Form</h3>
+      <p>For homeowners who may have exterior storm damage and need help getting started.</p>
+      <form class="web3form" data-form-name="Insurance Claim Request">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+        <input type="hidden" name="subject" value="New S9 Services Insurance / Storm Damage Request" />
+        <input type="hidden" name="from_name" value="S9 Services Website" />
+        <input type="hidden" name="redirect" value="" />
+        <input type="checkbox" name="botcheck" style="display:none" /><div class="grid-2">
+      <label>Full Name
+        <input type="text" name="name" required />
+      </label>
+      <label>Phone Number
+        <input type="tel" name="phone" required />
+      </label>
     </div>
-  </div>
-</section>
 
-  </main>  <footer>
+    <div class="grid-2">
+      <label>Email Address
+        <input type="email" name="email" required />
+      </label>
+      <label>Property Address
+        <input type="text" name="property_address" required />
+      </label>
+    </div>
+
+    <div class="grid-2">
+      <label>Type of Damage
+        <select name="damage_type" required>
+          <option value="">Select one</option>
+          <option>Roofing</option>
+          <option>Siding</option>
+          <option>Windows</option>
+          <option>Doors</option>
+          <option>Hail</option>
+          <option>Wind</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>Has a claim been filed?
+        <select name="claim_filed" required>
+          <option value="">Select one</option>
+          <option>Yes</option>
+          <option>No</option>
+          <option>Not Yet</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="grid-2">
+      <label>Insurance Company
+        <input type="text" name="insurance_company" />
+      </label>
+      <label>Preferred Contact Method
+        <select name="preferred_contact" required>
+          <option value="">Select one</option>
+          <option>Call</option>
+          <option>Text</option>
+          <option>Email</option>
+        </select>
+      </label>
+    </div>
+
+    <label>Damage Description
+      <textarea name="message" required placeholder="Tell us what happened and what damage you think may be present."></textarea>
+    </label>
+
+    <button class="btn btn-primary" type="submit">Get Help With My Claim</button>
+    <div class="status" aria-live="polite"></div>
+  </form>
+</div>
+
+  </div>  <footer>
     <div class="container footer">
       <strong>S9 Services LLC</strong>
       <p>Byron, MI</p>
-      <p>Roofing • Siding • Windows • Doors • Insurance Claim Support</p>
-      <p><a href="tel:16163027699">616-302-7699</a> • <a href="mailto:projects@s9services.com">projects@s9services.com</a> • <a href="mailto:S9Servicesllc@gmail.com">S9Servicesllc@gmail.com</a></p>
       <p>Serving Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties</p>
     </div>
   </footer>  <script>
@@ -1017,10 +642,6 @@ footer {
       link.addEventListener('click', () => trackLead('click_call', { location: link.textContent.trim() || 'call_link' }));
     });
 
-    document.querySelectorAll('a[href^="sms:"]').forEach((link) => {
-      link.addEventListener('click', () => trackLead('click_text', { location: link.textContent.trim() || 'sms_link' }));
-    });
-
     document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
       link.addEventListener('click', () => trackLead('click_email', { location: link.textContent.trim() || 'email_link' }));
     });
@@ -1029,9 +650,33 @@ footer {
       link.addEventListener('click', () => trackLead('open_project_form'));
     });
 
-    document.querySelectorAll('a[href="#claims-form"]').forEach((link) => {
-      link.addEventListener('click', () => trackLead('open_claims_form'));
-    });
+    const insuranceModal = document.getElementById('insuranceModal');
+    const openInsuranceModal = document.getElementById('openInsuranceModal');
+    const closeInsuranceModal = document.getElementById('closeInsuranceModal');
+
+    if (openInsuranceModal && insuranceModal) {
+      openInsuranceModal.addEventListener('click', () => {
+        insuranceModal.classList.add('active');
+        insuranceModal.setAttribute('aria-hidden', 'false');
+        trackLead('open_claims_form');
+      });
+    }
+
+    if (closeInsuranceModal && insuranceModal) {
+      closeInsuranceModal.addEventListener('click', () => {
+        insuranceModal.classList.remove('active');
+        insuranceModal.setAttribute('aria-hidden', 'true');
+      });
+    }
+
+    if (insuranceModal) {
+      insuranceModal.addEventListener('click', (event) => {
+        if (event.target === insuranceModal) {
+          insuranceModal.classList.remove('active');
+          insuranceModal.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
 
     const forms = document.querySelectorAll('.web3form');
 
@@ -1063,6 +708,12 @@ footer {
               form_name: form.dataset.formName || 'unknown_form'
             });
             form.reset();
+            if (form.dataset.formName === 'Insurance Claim Request' && insuranceModal) {
+              setTimeout(() => {
+                insuranceModal.classList.remove('active');
+                insuranceModal.setAttribute('aria-hidden', 'true');
+              }, 800);
+            }
           } else {
             status.textContent = result.message || 'Something went wrong. Please try again.';
             trackLead('form_submit_error', {
@@ -1070,7 +721,7 @@ footer {
             });
           }
         } catch (error) {
-          status.textContent = 'Unable to send right now. Please call, text, or email instead.';
+          status.textContent = 'Unable to send right now. Please call or email instead.';
           trackLead('form_submit_error', {
             form_name: form.dataset.formName || 'unknown_form'
           });
