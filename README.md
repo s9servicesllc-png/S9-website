@@ -21,4 +21,4 @@ Livingston County, Shiawassee County, Genesee County, Oakland County, and Ingham
 ## Contact
 - Project Requests: projects@s9services.com
 - General Info: S9Servicesllc@gmail.com
-- Call / Text: 616-302-7699
+- Call / Text: 517-375-6843
