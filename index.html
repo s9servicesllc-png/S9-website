@@ -1,30 +1,26 @@
-export default function S9ServicesWebsite() { return ( <div className="min-h-screen bg-slate-50 text-slate-900"> <S9Page /> </div> ); }
+import React, { useMemo, useState } from "react"; import { motion } from "framer-motion"; import { Menu, X, Phone, Mail, MapPin, ShieldCheck, Home, Wind, CloudHail, ChevronRight, CheckCircle2, DoorOpen, PanelsTopLeft, House, Star, Clock3, BadgeCheck, ArrowRight, } from "lucide-react";
 
-import React, { useMemo, useState } from "react"; import { motion } from "framer-motion"; import { Menu, X, Phone, Mail, MapPin, ShieldCheck, Home, Wind, CloudHail, ChevronRight, CheckCircle2, Hammer, DoorOpen, PanelsTopLeft, House, MessageSquare, Star, Clock3, BadgeCheck, ArrowRight, } from "lucide-react";
+const WEB3FORMS_KEY = "a37d190c-b4a6-4df2-9602-c8e39a650400"; const PHONE_DISPLAY = "517-375-6843"; const PHONE_LINK = "tel:+15173756843"; const PROJECT_EMAIL = "projects@s9services.com"; const GENERAL_EMAIL = "S9Servicesllc@gmail.com";
 
-const WEB3FORMS_KEY = "a37d190c-b4a6-4df2-9602-c8e39a650400"; const LOGOS = { brandmark: "/s9-brandmark-dark.png", icon: "/s9-icon-dark.png", full: "/s9-full-logo-dark.png", }; const PHONE_DISPLAY = "517-375-6843"; const PHONE_LINK = "tel:+15173756843"; const PROJECT_EMAIL = "projects@s9services.com"; const GENERAL_EMAIL = "S9Servicesllc@gmail.com";
+const LOGOS = { brandmark: "/s9-brandmark-dark.png", icon: "/s9-icon-dark.png", full: "/s9-full-logo-dark.png", };
 
-const services = [ { title: "Roofing", description: "Roof replacements, storm-related repairs, and exterior roofing support designed to protect your home and help you move forward with confidence.", icon: House, }, { title: "Siding", description: "Siding solutions that improve protection, durability, curb appeal, and the finished look of your home.", icon: PanelsTopLeft, }, { title: "Windows", description: "Window upgrades and replacements that improve energy performance, comfort, and appearance.", icon: Home, }, { title: "Doors", description: "Exterior door solutions focused on security, weather protection, daily function, and clean curb appeal.", icon: DoorOpen, }, { title: "Storm Damage", description: "Fast next-step support after wind or hail, including inspections and guidance for what to do next.", icon: CloudHail, }, { title: "Insurance Claims", description: "Simple homeowner-focused help when you need documentation, communication support, and a clearer process.", icon: ShieldCheck, }, ];
+const services = [ { title: "Roofing", description: "Roof replacements, repairs, and storm-related roofing support designed to protect your home.", icon: House, }, { title: "Siding", description: "Siding solutions that improve protection, durability, and curb appeal.", icon: PanelsTopLeft, }, { title: "Windows", description: "Window upgrades and replacements that improve comfort and appearance.", icon: Home, }, { title: "Doors", description: "Exterior door solutions focused on security, weather protection, and style.", icon: DoorOpen, }, { title: "Storm Damage", description: "Fast next-step support after wind or hail, including inspections and guidance.", icon: CloudHail, }, { title: "Insurance Claims", description: "Simple homeowner-focused help when you need a clearer process after storm damage.", icon: ShieldCheck, }, ];
 
-const counties = [ { name: "Livingston County", text: "Roofing, siding, windows, doors, and storm damage help for homeowners throughout Livingston County.", }, { name: "Shiawassee County", text: "Exterior services and storm-related project support for homes across Shiawassee County.", }, { name: "Genesee County", text: "Clean exterior repair and replacement solutions for homeowners in Genesee County communities.", }, { name: "Oakland County", text: "Professional exterior project support and storm damage guidance for Oakland County homeowners.", }, { name: "Ingham County", text: "Exterior upgrades and storm response help for homeowners in Ingham County and nearby areas.", }, ];
+const counties = [ "Livingston County", "Shiawassee County", "Genesee County", "Oakland County", "Ingham County", ];
 
-const galleryItems = [ { title: "Roofing Projects", description: "Show off completed roofing replacements, repairs, and close-up detail shots.", }, { title: "Siding Upgrades", description: "Add before-and-after exterior transformations to build trust and credibility.", }, { title: "Storm Damage Examples", description: "Use real wind and hail examples to help homeowners recognize possible damage.", }, { title: "Windows & Doors", description: "Highlight finished work that improves appearance, function, and curb appeal.", }, ];
+const faqs = [ { q: "What areas do you serve?", a: "S9 Services serves Livingston County, Shiawassee County, Genesee County, Oakland County, and Ingham County in Michigan.", }, { q: "What should I do if I think my home has storm damage?", a: "Start with a quick inspection request. Wind and hail damage is not always obvious from the ground, and getting the right next step early can help prevent larger problems.", }, { q: "Do you help with insurance claims?", a: "Yes. S9 Services offers support for homeowners who need help getting started and understanding their next step after storm-related exterior damage.", }, { q: "What types of projects do you handle?", a: "Roofing, siding, windows, doors, storm damage inspections, and insurance-claim-related exterior projects.", }, ];
 
-const faqs = [ { q: "What areas do you serve?", a: "S9 Services serves Livingston County, Shiawassee County, Genesee County, Oakland County, and Ingham County in Michigan.", }, { q: "What should I do if I think my home has storm damage?", a: "Start with a quick inspection request. Wind and hail damage is not always obvious from the ground, and getting the right next step early can help prevent larger problems.", }, { q: "Do you help with insurance claims?", a: "Yes. S9 Services offers support for homeowners who need help getting started and understanding their next step after storm-related exterior damage.", }, { q: "What types of projects do you handle?", a: "Roofing, siding, windows, doors, storm damage inspections, and insurance claim-related exterior projects.", }, { q: "How do I contact you fastest?", a: "The fastest option is to call or text 517-375-6843, or you can submit the project request form on the site.", }, ];
+export default function S9ServicesWebsite() { const [mobileOpen, setMobileOpen] = useState(false); const [activeForm, setActiveForm] = useState("project");
 
-function S9Page() { const [mobileOpen, setMobileOpen] = useState(false); const [activeForm, setActiveForm] = useState("project");
-
-return ( <> <TopBar /> <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+return ( <div className="min-h-screen bg-slate-50 text-slate-900"> <TopBar /> <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
 <main>
-    <Hero onOpenProject={() => setActiveForm("project")} onOpenStorm={() => setActiveForm("storm")} />
+    <Hero setActiveForm={setActiveForm} />
     <TrustStrip />
     <ServicesSection />
-    <StormSection onOpenStorm={() => setActiveForm("storm")} />
+    <StormSection setActiveForm={setActiveForm} />
     <ServiceAreasSection />
-    <GallerySection />
-    <ProcessSection />
-    <TestimonialsSection />
+    <BrandAssetsSection />
     <FormSection activeForm={activeForm} setActiveForm={setActiveForm} />
     <FAQSection />
     <ContactSection />
@@ -32,19 +28,15 @@ return ( <> <TopBar /> <Header mobileOpen={mobileOpen} setMobileOpen={setMobileO
 
   <Footer />
   <MobileCallBar />
-</>
+</div>
 
 ); }
 
-function TopBar() { return ( <div className="bg-slate-950 text-white"> <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-4 py-3 text-center text-sm font-medium sm:flex-row sm:items-center sm:justify-between sm:text-left lg:px-6"> <div className="flex items-center justify-center gap-2 sm:justify-start"> <MapPin className="h-4 w-4" /> <span> Serving Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties </span> </div> <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end"> <a href={PHONE_LINK} className="inline-flex items-center gap-2 font-semibold hover:opacity-80"> <Phone className="h-4 w-4" /> {PHONE_DISPLAY} </a> <a href={mailto:${PROJECT_EMAIL}} className="inline-flex items-center gap-2 font-semibold hover:opacity-80"> <Mail className="h-4 w-4" /> Project Requests </a> </div> </div> </div> ); }
+function TopBar() { return ( <div className="bg-slate-950 text-white"> <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 text-center text-sm font-medium sm:flex-row sm:items-center sm:justify-between sm:text-left lg:px-6"> <div className="flex items-center justify-center gap-2 sm:justify-start"> <MapPin className="h-4 w-4" /> <span>Serving Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties</span> </div> <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end"> <a href={PHONE_LINK} className="inline-flex items-center gap-2 font-semibold hover:opacity-80"> <Phone className="h-4 w-4" /> {PHONE_DISPLAY} </a> <a href={mailto:${PROJECT_EMAIL}} className="inline-flex items-center gap-2 font-semibold hover:opacity-80"> <Mail className="h-4 w-4" /> Project Requests </a> </div> </div> </div> ); }
 
-function Header({ mobileOpen, setMobileOpen }) { const links = [ ["Services", "#services"], ["Storm Damage", "#storm-damage"], ["Service Areas", "#service-areas"], ["Gallery", "#gallery"], ["FAQ", "#faq"], ["Contact", "#contact"], ];
+function Header({ mobileOpen, setMobileOpen }) { const links = [ ["Services", "#services"], ["Storm Damage", "#storm-damage"], ["Service Areas", "#service-areas"], ["Request", "#project-request"], ["FAQ", "#faq"], ["Contact", "#contact"], ];
 
-return ( <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur"> <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 lg:px-6"> <a href="#home" className="flex items-center gap-3"> <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm"> <img
-src={LOGOS.icon}
-alt="S9 Services brand mark"
-className="h-full w-full object-contain"
-/> </div> <div> <div className="text-lg font-black tracking-tight">S9 Services</div> <div className="text-sm text-slate-600">Roofing • Siding • Windows • Doors</div> </div> </a>
+return ( <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur"> <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 lg:px-6"> <a href="#home" className="flex items-center gap-3"> <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm"> <img src={LOGOS.icon} alt="S9 Services icon" className="h-full w-full object-contain" /> </div> <div> <div className="text-lg font-black tracking-tight">S9 Services</div> <div className="text-sm text-slate-600">Roofing • Siding • Windows • Doors</div> </div> </a>
 
 <nav className="hidden items-center gap-6 lg:flex">
       {links.map(([label, href]) => (
@@ -52,10 +44,7 @@ className="h-full w-full object-contain"
           {label}
         </a>
       ))}
-      <a
-        href="#project-request"
-        className="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5"
-      >
+      <a href="#project-request" className="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5">
         Request a Project
       </a>
     </nav>
@@ -97,34 +86,15 @@ className="h-full w-full object-contain"
 
 ); }
 
-function Hero({ onOpenProject, onOpenStorm }) { return ( <section id="home" className="relative overflow-hidden"> <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.16),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.08),transparent_28%)]" /> <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-6 lg:py-24"> <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="flex flex-col justify-center" > <div className="mb-5 inline-flex w-fit items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-amber-800"> Michigan Exterior Contractor </div> <h1 className="max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-7xl"> Roofing, siding, windows, and doors done with a cleaner process. </h1> <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600"> S9 Services LLC helps Mid-Michigan homeowners with exterior projects, storm damage inspections, and insurance claim support across Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties. </p> <div className="mt-8 flex flex-col gap-3 sm:flex-row"> <a
-href="#project-request"
-onClick={onOpenProject}
-className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-bold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5"
-> Request a Project <ArrowRight className="ml-2 h-4 w-4" /> </a> <a
+function Hero({ setActiveForm }) { return ( <section id="home" className="relative overflow-hidden"> <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.16),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.08),transparent_28%)]" /> <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-6 lg:py-24"> <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="flex flex-col justify-center"> <div className="mb-5 inline-flex w-fit items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-amber-800"> Michigan Exterior Contractor </div> <h1 className="max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-7xl"> Roofing, siding, windows, and doors for Mid-Michigan homes. </h1> <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600"> S9 Services LLC helps homeowners with exterior projects, storm damage inspections, and insurance claim support across five Mid-Michigan counties. </p> <div className="mt-8 flex flex-col gap-3 sm:flex-row"> <a href="#project-request" onClick={() => setActiveForm("project")} className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-bold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5" > Request a Project <ArrowRight className="ml-2 h-4 w-4" /> </a> <a
 href={PHONE_LINK}
 className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-4 font-bold text-slate-900 transition hover:-translate-y-0.5"
-> <Phone className="mr-2 h-4 w-4" /> Call / Text {PHONE_DISPLAY} </a> <a
-href="#project-request"
-onClick={onOpenStorm}
-className="inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-4 font-bold text-slate-950 transition hover:-translate-y-0.5"
-> Start Storm Damage Form </a> </div> <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold text-slate-700"> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Roofing</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Siding</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Windows</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Doors</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Storm Damage</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Insurance Claim Support</span> </div> </motion.div>
+> <Phone className="mr-2 h-4 w-4" /> Call / Text {PHONE_DISPLAY} </a> <a href="#project-request" onClick={() => setActiveForm("storm")} className="inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-4 font-bold text-slate-950 transition hover:-translate-y-0.5" > Start Storm Damage Form </a> </div> </motion.div>
 
-<motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, delay: 0.08 }}
-      className="grid gap-4"
-    >
+<motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.08 }} className="grid gap-4">
       <div className="rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl shadow-slate-950/15">
-        <div className="mb-5 flex items-center gap-3">
-          <div className="inline-flex rounded-[1.25rem] bg-white p-3 shadow-lg shadow-black/10">
-            <img
-              src={LOGOS.full}
-              alt="S9 Services full logo"
-              className="h-14 w-auto object-contain sm:h-16"
-            />
-          </div>
+        <div className="mb-5 inline-flex rounded-[1.25rem] bg-white p-3 shadow-lg shadow-black/10">
+          <img src={LOGOS.full} alt="S9 Services full logo" className="h-14 w-auto object-contain sm:h-16" />
         </div>
         <h2 className="text-2xl font-black tracking-tight">Fast help for exterior problems</h2>
         <p className="mt-3 text-slate-300">
@@ -135,7 +105,7 @@ className="inline-flex items-center justify-center rounded-full bg-amber-400 px-
             "Roofing, siding, windows, and doors",
             "Storm damage inspections and homeowner guidance",
             "Insurance claim support without the clutter",
-            "Mobile-first contact experience with fast call and form options",
+            "Fast call, text, and form options",
           ].map((item) => (
             <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
               <CheckCircle2 className="mt-0.5 h-5 w-5 text-amber-300" />
@@ -157,39 +127,13 @@ className="inline-flex items-center justify-center rounded-full bg-amber-400 px-
 
 function StatCard({ icon: Icon, title, text }) { return ( <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm"> <div className="mb-4 inline-flex rounded-2xl bg-slate-100 p-3"> <Icon className="h-5 w-5" /> </div> <div className="text-lg font-black tracking-tight">{title}</div> <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p> </div> ); }
 
-function TrustStrip() { const items = [ "Locally focused service area", "Storm damage support", "Mobile-friendly lead capture", "Roofing, siding, windows, and doors", ];
+function TrustStrip() { const items = [ "Locally focused service area", "Storm damage support", "Mobile-friendly contact flow", "Roofing, siding, windows, and doors", ];
 
 return ( <section className="border-y border-slate-200 bg-white"> <div className="mx-auto grid max-w-7xl gap-4 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-6"> {items.map((item) => ( <div key={item} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 font-semibold text-slate-700"> <ShieldCheck className="h-5 w-5" /> <span>{item}</span> </div> ))} </div> </section> ); }
 
-function ServicesSection() { return ( <section id="services" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
-eyebrow="Services"
-title="Professional exterior services without the clutter"
-text="Your website now positions S9 Services as a cleaner, higher-trust brand with stronger conversion sections and more local relevance."
-/>
+function ServicesSection() { return ( <section id="services" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro eyebrow="Services" title="Professional exterior services" text="A clean, mobile-friendly layout built around the services you actually offer." /> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3"> {services.map((service) => { const Icon = service.icon; return ( <motion.article key={service.title} whileHover={{ y: -4 }} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm"> <div className="mb-5 inline-flex rounded-2xl bg-slate-100 p-3"> <Icon className="h-6 w-6" /> </div> <h3 className="text-xl font-black tracking-tight">{service.title}</h3> <p className="mt-3 leading-7 text-slate-600">{service.description}</p> </motion.article> ); })} </div> </section> ); }
 
-<div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-    {services.map((service) => {
-      const Icon = service.icon;
-      return (
-        <motion.article
-          key={service.title}
-          whileHover={{ y: -4 }}
-          className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm"
-        >
-          <div className="mb-5 inline-flex rounded-2xl bg-slate-100 p-3">
-            <Icon className="h-6 w-6" />
-          </div>
-          <h3 className="text-xl font-black tracking-tight">{service.title}</h3>
-          <p className="mt-3 text-slate-600 leading-7">{service.description}</p>
-        </motion.article>
-      );
-    })}
-  </div>
-</section>
-
-); }
-
-function StormSection({ onOpenStorm }) { return ( <section id="storm-damage" className="px-4 pb-4 lg:px-6"> <div className="mx-auto max-w-7xl rounded-[2rem] bg-slate-950 px-6 py-10 text-white shadow-2xl shadow-slate-950/15 sm:px-8 lg:px-10 lg:py-14"> <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center"> <div> <div className="mb-4 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.2em] text-amber-300"> Storm Damage Help </div> <h2 className="max-w-3xl text-3xl font-black tracking-tight sm:text-4xl"> Michigan storm damage? Get your exterior checked before the problem spreads. </h2> <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300"> Wind and hail damage can affect roofing, siding, windows, trim, and doors without being obvious from the ground. Start with a form or call/text now. </p> <div className="mt-6 flex flex-wrap gap-3"> {["Wind damage", "Hail damage", "Insurance claim support", "Roof, siding, windows, and doors"].map((item) => ( <span key={item} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white"> {item} </span> ))} </div> </div>
+function StormSection({ setActiveForm }) { return ( <section id="storm-damage" className="px-4 pb-4 lg:px-6"> <div className="mx-auto max-w-7xl rounded-[2rem] bg-slate-950 px-6 py-10 text-white shadow-2xl shadow-slate-950/15 sm:px-8 lg:px-10 lg:py-14"> <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center"> <div> <div className="mb-4 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.2em] text-amber-300"> Storm Damage Help </div> <h2 className="max-w-3xl text-3xl font-black tracking-tight sm:text-4xl"> Michigan storm damage? Get your exterior checked before the problem spreads. </h2> <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300"> Wind and hail damage can affect roofing, siding, windows, trim, and doors without being obvious from the ground. </p> <div className="mt-6 flex flex-wrap gap-3"> {["Wind damage", "Hail damage", "Insurance claim support", "Roof, siding, windows, and doors"].map((item) => ( <span key={item} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white"> {item} </span> ))} </div> </div>
 
 <div className="grid gap-4 rounded-[2rem] border border-white/10 bg-white/5 p-5">
         <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/10 p-4">
@@ -207,11 +151,7 @@ function StormSection({ onOpenStorm }) { return ( <section id="storm-damage" cla
           </div>
         </div>
         <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-          <a
-            href="#project-request"
-            onClick={onOpenStorm}
-            className="inline-flex items-center justify-center rounded-full bg-amber-400 px-5 py-3 font-bold text-slate-950"
-          >
+          <a href="#project-request" onClick={() => setActiveForm("storm")} className="inline-flex items-center justify-center rounded-full bg-amber-400 px-5 py-3 font-bold text-slate-950">
             Start Storm Damage Form
           </a>
           <a href={PHONE_LINK} className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 font-bold text-white">
@@ -225,46 +165,19 @@ function StormSection({ onOpenStorm }) { return ( <section id="storm-damage" cla
 
 ); }
 
-function ServiceAreasSection() { return ( <section id="service-areas" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
-eyebrow="Service Areas"
-title="Built to rank better across your real service counties"
-text="This section now includes all five counties instead of only showing three cards, giving your local SEO stronger coverage and clearer relevance."
-/> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5"> {counties.map((county) => ( <article key={county.name} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm"> <div className="mb-4 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.2em] text-slate-700"> County </div> <h3 className="text-lg font-black tracking-tight">{county.name}</h3> <p className="mt-3 text-sm leading-7 text-slate-600">{county.text}</p> </article> ))} </div> </section> ); }
+function ServiceAreasSection() { return ( <section id="service-areas" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro eyebrow="Service Areas" title="Serving Byron and nearby Mid-Michigan communities" text="Built around the counties you actually serve, with stronger local relevance." /> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5"> {counties.map((county) => ( <article key={county} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm"> <div className="mb-4 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.2em] text-slate-700">County</div> <h3 className="text-lg font-black tracking-tight">{county}</h3> <p className="mt-3 text-sm leading-7 text-slate-600"> S9 Services helps homeowners in {county} with roofing, siding, windows, doors, and storm damage support. </p> </article> ))} </div> </section> ); }
 
-function GallerySection() { return ( <section id="gallery" className="bg-white py-16 lg:py-24"> <div className="mx-auto max-w-7xl px-4 lg:px-6"> <SectionIntro
-eyebrow="Gallery"
-title="A stronger visual trust section for photos, before-and-afters, and project proof"
-text="I added a gallery section so you have a place to plug in real project photos later. Replace the placeholders with your own images when ready."
-/> <div className="mb-8 rounded-[2rem] border border-slate-200 bg-slate-50 p-6 shadow-sm"> <div className="mb-4 text-sm font-extrabold uppercase tracking-[0.18em] text-slate-500">Brand assets</div> <div className="grid gap-4 md:grid-cols-3"> <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5 text-center"> <div className="mb-4 flex min-h-[120px] items-center justify-center rounded-[1.25rem] bg-slate-50 p-4"> <img src={LOGOS.full} alt="S9 Services full logo" className="max-h-24 w-auto object-contain" /> </div> <div className="text-sm font-bold text-slate-900">Full Logo</div> </div> <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5 text-center"> <div className="mb-4 flex min-h-[120px] items-center justify-center rounded-[1.25rem] bg-slate-50 p-4"> <img src={LOGOS.brandmark} alt="S9 Services brand mark" className="max-h-24 w-auto object-contain" /> </div> <div className="text-sm font-bold text-slate-900">Brand Mark</div> </div> <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5 text-center"> <div className="mb-4 flex min-h-[120px] items-center justify-center rounded-[1.25rem] bg-slate-50 p-4"> <img src={LOGOS.icon} alt="S9 Services icon logo" className="max-h-24 w-auto object-contain" /> </div> <div className="text-sm font-bold text-slate-900">Icon / Header Mark</div> </div> </div> </div> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"> {galleryItems.map((item) => ( <div key={item.title} className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50 shadow-sm"> <div className="flex aspect-[4/3] items-center justify-center bg-[linear-gradient(135deg,#e2e8f0,#f8fafc)] p-6 text-center text-sm font-semibold text-slate-500"> Add real project image here </div> <div className="p-5"> <h3 className="text-lg font-black tracking-tight">{item.title}</h3> <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p> </div> </div> ))} </div> </div> </section> ); }
+function BrandAssetsSection() { return ( <section className="bg-white py-16 lg:py-24"> <div className="mx-auto max-w-7xl px-4 lg:px-6"> <SectionIntro eyebrow="Brand Assets" title="Your logo system is built into the layout" text="This version uses the icon in the header, the full logo in the hero, and the brand mark in the footer." /> <div className="grid gap-5 md:grid-cols-3"> <BrandCard src={LOGOS.full} title="Full Logo" /> <BrandCard src={LOGOS.brandmark} title="Brand Mark" /> <BrandCard src={LOGOS.icon} title="Icon / Header Mark" /> </div> </div> </section> ); }
 
-function ProcessSection() { const steps = [ "Reach out by form, phone, or text", "Share your project or storm damage details", "Get a clear next step from S9 Services", "Move forward with a cleaner process", ];
+function BrandCard({ src, title }) { return ( <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-5 shadow-sm"> <div className="flex min-h-[180px] items-center justify-center rounded-[1.5rem] bg-white p-6"> <img src={src} alt={title} className="max-h-28 w-auto object-contain" /> </div> <div className="pt-4 text-center text-base font-black tracking-tight text-slate-900">{title}</div> </div> ); }
 
-return ( <section className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
-eyebrow="Process"
-title="Simple next steps that work well on desktop and phone"
-text="This gives the site a more premium, organized feel and makes it easier for visitors to understand what happens next."
-/> <div className="grid gap-5 lg:grid-cols-4"> {steps.map((step, index) => ( <div key={step} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm"> <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-lg font-black text-white"> {index + 1} </div> <div className="text-lg font-black tracking-tight">{step}</div> </div> ))} </div> </section> ); }
-
-function TestimonialsSection() { const testimonials = [ { name: "Homeowner Review", text: "Add a real customer review here about communication, professionalism, and how easy the process felt.", }, { name: "Storm Damage Client", text: "Use a review here that mentions quick response, claim support, or help after wind or hail damage.", }, { name: "Exterior Project Customer", text: "Include a review here about roofing, siding, windows, or doors and the finished result.", }, ];
-
-return ( <section className="bg-slate-950 py-16 text-white lg:py-24"> <div className="mx-auto max-w-7xl px-4 lg:px-6"> <SectionIntroDark
-eyebrow="Reviews"
-title="A place for trust-building reviews and social proof"
-text="Reviews are one of the highest-impact additions for a contractor site. Swap these placeholders with real customer feedback.
-"
-/> <div className="grid gap-5 lg:grid-cols-3"> {testimonials.map((item) => ( <div key={item.name} className="rounded-[2rem] border border-white/10 bg-white/5 p-6"> <div className="mb-4 flex items-center gap-1 text-amber-300"> <Star className="h-4 w-4 fill-current" /> <Star className="h-4 w-4 fill-current" /> <Star className="h-4 w-4 fill-current" /> <Star className="h-4 w-4 fill-current" /> <Star className="h-4 w-4 fill-current" /> </div> <p className="leading-7 text-slate-200">“{item.text}”</p> <div className="mt-5 font-bold text-white">{item.name}</div> </div> ))} </div> </div> </section> ); }
-
-function FormSection({ activeForm, setActiveForm }) { return ( <section id="project-request" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
-eyebrow="Project Request"
-title="Request a project or start a storm damage claim"
-text="I replaced the auto-popup behavior with a cleaner tabbed form section so visitors can choose the right form without being interrupted."
-/>
+function FormSection({ activeForm, setActiveForm }) { return ( <section id="project-request" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro eyebrow="Project Request" title="Request a project or start a storm damage claim" text="A cleaner form section with no aggressive popup." />
 
 <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
     <div className="rounded-[2rem] bg-slate-950 p-8 text-white shadow-2xl shadow-slate-950/10">
       <h3 className="text-2xl font-black tracking-tight">Fast contact options</h3>
-      <p className="mt-3 text-slate-300 leading-7">
-        This section is designed to convert better on mobile and desktop while keeping the process simple.
+      <p className="mt-3 leading-7 text-slate-300">
+        Reach out by call, text, email, or form.
       </p>
 
       <div className="mt-6 grid gap-4">
@@ -280,18 +193,14 @@ text="I replaced the auto-popup behavior with a cleaner tabbed form section so v
         <button
           type="button"
           onClick={() => setActiveForm("project")}
-          className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-            activeForm === "project" ? "bg-slate-950 text-white" : "text-slate-700"
-          }`}
+          className={`rounded-full px-4 py-2 text-sm font-bold transition ${activeForm === "project" ? "bg-slate-950 text-white" : "text-slate-700"}`}
         >
           Project Form
         </button>
         <button
           type="button"
           onClick={() => setActiveForm("storm")}
-          className={`rounded-full px-4 py-2 text-sm font-bold transition ${
-            activeForm === "storm" ? "bg-slate-950 text-white" : "text-slate-700"
-          }`}
+          className={`rounded-full px-4 py-2 text-sm font-bold transition ${activeForm === "storm" ? "bg-slate-950 text-white" : "text-slate-700"}`}
         >
           Storm Damage Form
         </button>
@@ -304,11 +213,11 @@ text="I replaced the auto-popup behavior with a cleaner tabbed form section so v
 
 ); }
 
-function ProjectForm() { return ( <Web3Form formName="Project Request" subject="New S9 Services Project Request" fields={[ { name: "name", label: "Full Name", type: "text", required: true }, { name: "phone", label: "Phone Number", type: "tel", required: true }, { name: "email", label: "Email Address", type: "email", required: true }, { name: "property_address", label: "Property Address", type: "text", required: true }, { name: "service_needed", label: "Service Needed", type: "select", required: true, options: ["Roofing", "Siding", "Windows", "Doors", "Storm Damage", "Other"], }, { name: "preferred_contact", label: "Preferred Contact Method", type: "select", required: true, options: ["Call", "Text", "Email"], }, { name: "message", label: "Project Description", type: "textarea", required: true, placeholder: "Tell us about the project and what help you need.", }, ]} buttonLabel="Request My Project" /> ); }
+function ProjectForm() { return ( <Web3Form subject="New S9 Services Project Request" buttonLabel="Request My Project" fields={[ { name: "name", label: "Full Name", type: "text", required: true }, { name: "phone", label: "Phone Number", type: "tel", required: true }, { name: "email", label: "Email Address", type: "email", required: true }, { name: "property_address", label: "Property Address", type: "text", required: true }, { name: "service_needed", label: "Service Needed", type: "select", required: true, options: ["Roofing", "Siding", "Windows", "Doors", "Storm Damage", "Other"] }, { name: "preferred_contact", label: "Preferred Contact Method", type: "select", required: true, options: ["Call", "Text", "Email"] }, { name: "message", label: "Project Description", type: "textarea", required: true, placeholder: "Tell us about the project and what help you need." }, ]} /> ); }
 
-function StormForm() { return ( <Web3Form formName="Insurance Claim Request" subject="New S9 Services Insurance / Storm Damage Request" fields={[ { name: "name", label: "Full Name", type: "text", required: true }, { name: "phone", label: "Phone Number", type: "tel", required: true }, { name: "email", label: "Email Address", type: "email", required: true }, { name: "property_address", label: "Property Address", type: "text", required: true }, { name: "damage_type", label: "Type of Damage", type: "select", required: true, options: ["Roofing", "Siding", "Windows", "Doors", "Hail", "Wind", "Other"], }, { name: "claim_filed", label: "Has a claim been filed?", type: "select", required: true, options: ["Yes", "No", "Not Yet"], }, { name: "insurance_company", label: "Insurance Company", type: "text", required: false, }, { name: "preferred_contact", label: "Preferred Contact Method", type: "select", required: true, options: ["Call", "Text", "Email"], }, { name: "message", label: "Damage Description", type: "textarea", required: true, placeholder: "Tell us what happened and what damage you think may be present.", }, ]} buttonLabel="Get Help With My Claim" /> ); }
+function StormForm() { return ( <Web3Form subject="New S9 Services Insurance / Storm Damage Request" buttonLabel="Get Help With My Claim" fields={[ { name: "name", label: "Full Name", type: "text", required: true }, { name: "phone", label: "Phone Number", type: "tel", required: true }, { name: "email", label: "Email Address", type: "email", required: true }, { name: "property_address", label: "Property Address", type: "text", required: true }, { name: "damage_type", label: "Type of Damage", type: "select", required: true, options: ["Roofing", "Siding", "Windows", "Doors", "Hail", "Wind", "Other"] }, { name: "claim_filed", label: "Has a claim been filed?", type: "select", required: true, options: ["Yes", "No", "Not Yet"] }, { name: "insurance_company", label: "Insurance Company", type: "text", required: false }, { name: "preferred_contact", label: "Preferred Contact Method", type: "select", required: true, options: ["Call", "Text", "Email"] }, { name: "message", label: "Damage Description", type: "textarea", required: true, placeholder: "Tell us what happened and what damage you think may be present." }, ]} /> ); }
 
-function Web3Form({ formName, subject, fields, buttonLabel }) { const initialState = useMemo(() => { const obj = {}; fields.forEach((field) => { obj[field.name] = ""; }); return obj; }, [fields]);
+function Web3Form({ subject, fields, buttonLabel }) { const initialState = useMemo(() => { const next = {}; fields.forEach((field) => { next[field.name] = ""; }); return next; }, [fields]);
 
 const [values, setValues] = useState(initialState); const [status, setStatus] = useState(""); const [loading, setLoading] = useState(false);
 
@@ -318,7 +227,6 @@ const formData = new FormData();
 formData.append("access_key", WEB3FORMS_KEY);
 formData.append("subject", subject);
 formData.append("from_name", "S9 Services Website");
-formData.append("botcheck", "");
 
 Object.entries(values).forEach(([key, value]) => {
   formData.append(key, value);
@@ -329,7 +237,6 @@ try {
     method: "POST",
     body: formData,
   });
-
   const result = await response.json();
 
   if (result.success) {
@@ -338,7 +245,7 @@ try {
   } else {
     setStatus(result.message || "Something went wrong. Please try again.");
   }
-} catch (error) {
+} catch {
   setStatus("Unable to send right now. Please call or email instead.");
 } finally {
   setLoading(false);
@@ -346,27 +253,13 @@ try {
 
 }
 
-return ( <form onSubmit={handleSubmit} className="grid gap-5"> <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+return ( <form onSubmit={handleSubmit} className="grid gap-5"> <div className="grid gap-5 md:grid-cols-2"> {fields.filter((field) => field.type !== "textarea").map((field) => ( <FormField key={field.name} field={field} value={values[field.name]} setValues={setValues} /> ))} </div>
 
-<div className="grid gap-5 md:grid-cols-2">
-    {fields
-      .filter((field) => field.type !== "textarea")
-      .map((field) => (
-        <FormField key={field.name} field={field} value={values[field.name]} setValues={setValues} />
-      ))}
-  </div>
+{fields.filter((field) => field.type === "textarea").map((field) => (
+    <FormField key={field.name} field={field} value={values[field.name]} setValues={setValues} />
+  ))}
 
-  {fields
-    .filter((field) => field.type === "textarea")
-    .map((field) => (
-      <FormField key={field.name} field={field} value={values[field.name]} setValues={setValues} fullWidth />
-    ))}
-
-  <button
-    type="submit"
-    disabled={loading}
-    className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
-  >
+  <button type="submit" disabled={loading} className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70">
     {buttonLabel}
   </button>
   <div className="min-h-6 text-sm font-semibold text-slate-700">{status}</div>
@@ -374,35 +267,24 @@ return ( <form onSubmit={handleSubmit} className="grid gap-5"> <input type="hidd
 
 ); }
 
-function FormField({ field, value, setValues }) { return ( <label className="grid gap-2 text-sm font-bold text-slate-800"> <span>{field.label}</span> {field.type === "select" ? ( <select required={field.required} value={value} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className="rounded-2xl border border-slate-300 bg-white px-4 py-4 text-base font-medium text-slate-900 outline-none ring-0 transition focus:border-slate-950" > <option value="">Select one</option> {field.options.map((option) => ( <option key={option} value={option}> {option} </option> ))} </select> ) : field.type === "textarea" ? ( <textarea required={field.required} value={value} placeholder={field.placeholder || ""} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className="min-h-[160px] rounded-[1.5rem] border border-slate-300 bg-white px-4 py-4 text-base font-medium text-slate-900 outline-none transition focus:border-slate-950" /> ) : ( <input type={field.type} required={field.required} value={value} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className="rounded-2xl border border-slate-300 bg-white px-4 py-4 text-base font-medium text-slate-900 outline-none transition focus:border-slate-950" /> )} </label> ); }
+function FormField({ field, value, setValues }) { const inputClass = "rounded-2xl border border-slate-300 bg-white px-4 py-4 text-base font-medium text-slate-900 outline-none transition focus:border-slate-950";
 
-function FAQSection() { return ( <section id="faq" className="bg-white py-16 lg:py-24"> <div className="mx-auto max-w-5xl px-4 lg:px-6"> <SectionIntro
-eyebrow="FAQ"
-title="Frequently asked questions"
-text="FAQ sections help with trust, conversions, and long-tail search visibility."
-/> <div className="grid gap-4"> {faqs.map((faq) => ( <details key={faq.q} className="group rounded-[1.75rem] border border-slate-200 bg-slate-50 p-6 shadow-sm"> <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-black tracking-tight text-slate-950"> {faq.q} <ChevronRight className="h-5 w-5 transition group-open:rotate-90" /> </summary> <p className="mt-4 leading-7 text-slate-600">{faq.a}</p> </details> ))} </div> </div> </section> ); }
+return ( <label className="grid gap-2 text-sm font-bold text-slate-800"> <span>{field.label}</span> {field.type === "select" ? ( <select required={field.required} value={value} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className={inputClass} > <option value="">Select one</option> {field.options.map((option) => ( <option key={option} value={option}>{option}</option> ))} </select> ) : field.type === "textarea" ? ( <textarea required={field.required} value={value} placeholder={field.placeholder || ""} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className="min-h-[160px] rounded-[1.5rem] border border-slate-300 bg-white px-4 py-4 text-base font-medium text-slate-900 outline-none transition focus:border-slate-950" /> ) : ( <input type={field.type} required={field.required} value={value} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className={inputClass} /> )} </label> ); }
 
-function ContactSection() { return ( <section id="contact" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
-eyebrow="Contact"
-title="Reach out using the option that works best for you"
-text="This version makes your contact information more prominent and easier to use on phones."
-/> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"> <ContactCard icon={Phone} title="Call / Text" value={PHONE_DISPLAY} href={PHONE_LINK} /> <ContactCard icon={Mail} title="Project Requests" value={PROJECT_EMAIL} href={mailto:${PROJECT_EMAIL}} /> <ContactCard icon={Mail} title="General Info" value={GENERAL_EMAIL} href={mailto:${GENERAL_EMAIL}} /> <ContactCard icon={MapPin} title="Service Area" value="Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties" /> </div> </section> ); }
+function FAQSection() { return ( <section id="faq" className="bg-white py-16 lg:py-24"> <div className="mx-auto max-w-5xl px-4 lg:px-6"> <SectionIntro eyebrow="FAQ" title="Frequently asked questions" text="FAQ sections help with trust and conversions." /> <div className="grid gap-4"> {faqs.map((faq) => ( <details key={faq.q} className="group rounded-[1.75rem] border border-slate-200 bg-slate-50 p-6 shadow-sm"> <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-black tracking-tight text-slate-950"> {faq.q} <ChevronRight className="h-5 w-5 transition group-open:rotate-90" /> </summary> <p className="mt-4 leading-7 text-slate-600">{faq.a}</p> </details> ))} </div> </div> </section> ); }
 
-function ContactCard({ icon: Icon, title, value, href }) { const content = ( <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1"> <div className="mb-5 inline-flex rounded-2xl bg-slate-100 p-3"> <Icon className="h-5 w-5" /> </div> <div className="text-sm font-extrabold uppercase tracking-[0.18em] text-slate-500">{title}</div> <div className="mt-3 text-base font-bold text-slate-900 break-words">{value}</div> </div> );
+function ContactSection() { return ( <section id="contact" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro eyebrow="Contact" title="Reach out using the option that works best for you" text="Call, text, email, or submit a request online." /> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"> <ContactCard icon={Phone} title="Call / Text" value={PHONE_DISPLAY} href={PHONE_LINK} /> <ContactCard icon={Mail} title="Project Requests" value={PROJECT_EMAIL} href={mailto:${PROJECT_EMAIL}} /> <ContactCard icon={Mail} title="General Info" value={GENERAL_EMAIL} href={mailto:${GENERAL_EMAIL}} /> <ContactCard icon={MapPin} title="Service Area" value="Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties" /> </div> </section> ); }
 
-if (href) return <a href={href}>{content}</a>; return content; }
+function ContactCard({ icon: Icon, title, value, href }) { const content = ( <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1"> <div className="mb-5 inline-flex rounded-2xl bg-slate-100 p-3"> <Icon className="h-5 w-5" /> </div> <div className="text-sm font-extrabold uppercase tracking-[0.18em] text-slate-500">{title}</div> <div className="mt-3 break-words text-base font-bold text-slate-900">{value}</div> </div> );
+
+return href ? <a href={href}>{content}</a> : content; }
 
 function ContactCardDark({ icon: Icon, title, value, href }) { const content = ( <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"> <div className="flex items-start gap-3"> <div className="mt-0.5 rounded-xl bg-white/10 p-2"> <Icon className="h-4 w-4" /> </div> <div> <div className="text-xs font-extrabold uppercase tracking-[0.18em] text-slate-400">{title}</div> <div className="mt-1 break-words font-semibold text-white">{value}</div> </div> </div> </div> );
 
-if (href) return <a href={href}>{content}</a>; return content; }
+return href ? <a href={href}>{content}</a> : content; }
 
-function Footer() { return ( <footer className="border-t border-slate-200 bg-slate-50 pb-28 pt-10 lg:pb-10"> <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-[1fr_auto] lg:px-6"> <div> <div className="flex items-center gap-3"> <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm"> <img src={LOGOS.brandmark} alt="S9 Services brand mark" className="h-full w-full object-contain" /> </div> <div> <div className="text-lg font-black tracking-tight">S9 Services LLC</div> <div className="text-sm text-slate-600">Byron, Michigan</div> </div> </div> <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600"> Roofing, siding, windows, doors, storm damage inspections, and insurance claim support for Mid-Michigan homeowners. </p> </div> <div className="flex flex-col gap-2 text-sm font-semibold text-slate-600 lg:items-end"> <a href="#services" className="hover:text-slate-950">Services</a> <a href="#project-request" className="hover:text-slate-950">Project Request</a> <a href="#contact" className="hover:text-slate-950">Contact</a> <a href="#" className="hover:text-slate-950">Privacy Policy</a> <a href="#" className="hover:text-slate-950">Terms of Service</a> </div> </div> </footer> ); }
+function Footer() { return ( <footer className="border-t border-slate-200 bg-slate-50 pb-28 pt-10 lg:pb-10"> <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-[1fr_auto] lg:px-6"> <div> <div className="flex items-center gap-3"> <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm"> <img src={LOGOS.brandmark} alt="S9 Services brand mark" className="h-full w-full object-contain" /> </div> <div> <div className="text-lg font-black tracking-tight">S9 Services LLC</div> <div className="text-sm text-slate-600">Byron, Michigan</div> </div> </div> <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600"> Roofing, siding, windows, doors, storm damage inspections, and insurance claim support for Mid-Michigan homeowners. </p> </div> <div className="flex flex-col gap-2 text-sm font-semibold text-slate-600 lg:items-end"> <a href="#services" className="hover:text-slate-950">Services</a> <a href="#project-request" className="hover:text-slate-950">Project Request</a> <a href="#contact" className="hover:text-slate-950">Contact</a> </div> </div> </footer> ); }
 
-function MobileCallBar() { return ( <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-4 backdrop-blur lg:hidden"> <a
-href={PHONE_LINK}
-className="inline-flex w-full items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-extrabold text-white shadow-lg shadow-slate-950/15"
-> <Phone className="mr-2 h-4 w-4" /> Call / Text {PHONE_DISPLAY} </a> </div> ); }
+function MobileCallBar() { return ( <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-4 backdrop-blur lg:hidden"> <a href={PHONE_LINK} className="inline-flex w-full items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-extrabold text-white shadow-lg shadow-slate-950/15"> <Phone className="mr-2 h-4 w-4" /> Call / Text {PHONE_DISPLAY} </a> </div> ); }
 
 function SectionIntro({ eyebrow, title, text }) { return ( <div className="mb-10 max-w-3xl"> <div className="mb-3 inline-flex rounded-full bg-slate-100 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-slate-700"> {eyebrow} </div> <h2 className="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">{title}</h2> <p className="mt-4 text-lg leading-8 text-slate-600">{text}</p> </div> ); }
-
-function SectionIntroDark({ eyebrow, title, text }) { return ( <div className="mb-10 max-w-3xl"> <div className="mb-3 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-amber-300"> {eyebrow} </div> <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">{title}</h2> <p className="mt-4 text-lg leading-8 text-slate-300">{text}</p> </div> ); }
