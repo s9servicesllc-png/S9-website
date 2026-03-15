@@ -1,1021 +1,408 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>S9 Services | Roofing, Siding, Windows & Doors in Mid-Michigan</title>
-  <meta name="description" content="S9 Services provides roofing, siding, windows, doors, storm damage inspections, and insurance claim support for homeowners in Byron, Livingston County, Oakland County, Genesee County, Shiawassee County, and nearby Mid-Michigan areas." />
-  <meta name="keywords" content="roofing Livingston County MI, siding Oakland County MI, windows Genesee County MI, storm damage contractor Michigan, insurance claim roofing Michigan, Byron MI roofing contractor, S9 Services" />
-  <meta name="theme-color" content="#0f172a" />
-  <meta property="og:title" content="S9 Services | Roofing, Siding, Windows & Doors" />
-  <meta property="og:description" content="Roofing, siding, windows, doors, storm damage help, and insurance claim support for Mid-Michigan homeowners." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="6e611f84-0204-4e30-b131-e7dba51cf435"></script>
+export default function S9ServicesWebsite() { return ( <div className="min-h-screen bg-slate-50 text-slate-900"> <S9Page /> </div> ); }
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "S9 Services",
-    "telephone": "+15173756843",
-    "email": "projects@s9services.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Byron",
-      "addressRegion": "MI",
-      "addressCountry": "US"
-    },
-    "areaServed": [
-      "Livingston County, MI",
-      "Oakland County, MI",
-      "Genesee County, MI",
-      "Shiawassee County, MI",
-      "Ingham County, MI"
-    ],
-    "serviceType": [
-      "Roofing",
-      "Siding",
-      "Windows",
-      "Doors",
-      "Storm Damage Inspections",
-      "Insurance Claim Support"
-    ]
-  }
-  </script>
+import React, { useMemo, useState } from "react"; import { motion } from "framer-motion"; import { Menu, X, Phone, Mail, MapPin, ShieldCheck, Home, Wind, CloudHail, ChevronRight, CheckCircle2, Hammer, DoorOpen, PanelsTopLeft, House, MessageSquare, Star, Clock3, BadgeCheck, ArrowRight, } from "lucide-react";
 
-  <style>
-    :root {
-      --bg: #f8fafc;
-      --surface: rgba(255,255,255,0.72);
-      --surface-strong: rgba(255,255,255,0.92);
-      --text: #0f172a;
-      --muted: #475569;
-      --line: rgba(15, 23, 42, 0.08);
-      --brand: #0f172a;
-      --accent: #1e3a5f;
-      --gold: #caa24d;
-      --white: #ffffff;
-      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
-      --max: 1160px;
-    }
+const WEB3FORMS_KEY = "a37d190c-b4a6-4df2-9602-c8e39a650400"; const LOGOS = { brandmark: "/s9-brandmark-dark.png", icon: "/s9-icon-dark.png", full: "/s9-full-logo-dark.png", }; const PHONE_DISPLAY = "517-375-6843"; const PHONE_LINK = "tel:+15173756843"; const PROJECT_EMAIL = "projects@s9services.com"; const GENERAL_EMAIL = "S9Servicesllc@gmail.com";
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+const services = [ { title: "Roofing", description: "Roof replacements, storm-related repairs, and exterior roofing support designed to protect your home and help you move forward with confidence.", icon: House, }, { title: "Siding", description: "Siding solutions that improve protection, durability, curb appeal, and the finished look of your home.", icon: PanelsTopLeft, }, { title: "Windows", description: "Window upgrades and replacements that improve energy performance, comfort, and appearance.", icon: Home, }, { title: "Doors", description: "Exterior door solutions focused on security, weather protection, daily function, and clean curb appeal.", icon: DoorOpen, }, { title: "Storm Damage", description: "Fast next-step support after wind or hail, including inspections and guidance for what to do next.", icon: CloudHail, }, { title: "Insurance Claims", description: "Simple homeowner-focused help when you need documentation, communication support, and a clearer process.", icon: ShieldCheck, }, ];
 
-    body {
-      margin: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(202,162,77,0.10), transparent 28%),
-        linear-gradient(180deg, #ffffff, var(--bg));
-      line-height: 1.6;
-    }
+const counties = [ { name: "Livingston County", text: "Roofing, siding, windows, doors, and storm damage help for homeowners throughout Livingston County.", }, { name: "Shiawassee County", text: "Exterior services and storm-related project support for homes across Shiawassee County.", }, { name: "Genesee County", text: "Clean exterior repair and replacement solutions for homeowners in Genesee County communities.", }, { name: "Oakland County", text: "Professional exterior project support and storm damage guidance for Oakland County homeowners.", }, { name: "Ingham County", text: "Exterior upgrades and storm response help for homeowners in Ingham County and nearby areas.", }, ];
 
-    a { color: inherit; text-decoration: none; }
+const galleryItems = [ { title: "Roofing Projects", description: "Show off completed roofing replacements, repairs, and close-up detail shots.", }, { title: "Siding Upgrades", description: "Add before-and-after exterior transformations to build trust and credibility.", }, { title: "Storm Damage Examples", description: "Use real wind and hail examples to help homeowners recognize possible damage.", }, { title: "Windows & Doors", description: "Highlight finished work that improves appearance, function, and curb appeal.", }, ];
 
-    .container {
-      width: min(calc(100% - 2rem), var(--max));
-      margin: 0 auto;
-    }
+const faqs = [ { q: "What areas do you serve?", a: "S9 Services serves Livingston County, Shiawassee County, Genesee County, Oakland County, and Ingham County in Michigan.", }, { q: "What should I do if I think my home has storm damage?", a: "Start with a quick inspection request. Wind and hail damage is not always obvious from the ground, and getting the right next step early can help prevent larger problems.", }, { q: "Do you help with insurance claims?", a: "Yes. S9 Services offers support for homeowners who need help getting started and understanding their next step after storm-related exterior damage.", }, { q: "What types of projects do you handle?", a: "Roofing, siding, windows, doors, storm damage inspections, and insurance claim-related exterior projects.", }, { q: "How do I contact you fastest?", a: "The fastest option is to call or text 517-375-6843, or you can submit the project request form on the site.", }, ];
 
-    .topbar {
-      background: var(--brand);
-      color: rgba(255,255,255,0.94);
-      font-size: 0.94rem;
-    }
+function S9Page() { const [mobileOpen, setMobileOpen] = useState(false); const [activeForm, setActiveForm] = useState("project");
 
-    .topbar-inner {
-      padding: 0.8rem 0;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.45rem 0.9rem;
-    }
+return ( <> <TopBar /> <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
-    .topbar a {
-      font-weight: 700;
-      color: #fff;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255,255,255,0.76);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(15,23,42,0.06);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 0;
-    }
-
-    .brand strong {
-      display: block;
-      font-size: 1.08rem;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
-
-    .brand span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.15rem;
-    }
-
-    .nav-links a,
-    .nav-links button {
-      background: transparent;
-      border: none;
-      padding: 0;
-      font: inherit;
-      font-weight: 600;
-      color: var(--text);
-      cursor: pointer;
-      transition: color 0.2s ease, opacity 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links button:hover,
-    .text-link:hover {
-      color: var(--accent);
-    }
-
-    .hero {
-      padding: 5rem 0 4rem;
-    }
-
-    .hero-wrap {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      color: var(--accent);
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .hero h1 {
-      margin: 0 0 1rem;
-      font-size: clamp(2.35rem, 5vw, 4.6rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-      max-width: 12ch;
-    }
-
-    .hero p {
-      margin: 0 0 1.2rem;
-      color: var(--muted);
-      font-size: 1.06rem;
-      max-width: 58ch;
-    }
-
-    .hero-actions,
-    .cta-actions {
-      display: flex;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.95rem 1.35rem;
-      border-radius: 999px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-      cursor: pointer;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .btn-primary {
-      background: var(--brand);
-      color: var(--white);
-      box-shadow: var(--shadow);
-    }
-
-    .btn-secondary {
-      background: rgba(15,23,42,0.03);
-      color: var(--text);
-      border-color: rgba(15,23,42,0.08);
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: var(--brand);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-panel,
-    .cta-band {
-      padding: 1.6rem;
-      border-radius: 32px;
-      background: linear-gradient(180deg, rgba(15,23,42,0.98), rgba(30,41,59,0.96));
-      color: rgba(255,255,255,0.92);
-      box-shadow: 0 30px 80px rgba(15,23,42,0.18);
-    }
-
-    .hero-panel h3,
-    .cta-band h2 {
-      margin: 0 0 0.9rem;
-      color: #fff;
-      font-size: 1.2rem;
-    }
-
-    .hero-panel p,
-    .cta-band p {
-      color: rgba(255,255,255,0.82);
-      margin-bottom: 1rem;
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 0.8rem;
-      margin-top: 1.25rem;
-    }
-
-    .mini-list div {
-      padding: 0.85rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-      font-weight: 600;
-    }
-
-    section {
-      padding: 4.25rem 0;
-    }
-
-    .section-head {
-      margin-bottom: 1.8rem;
-      max-width: 760px;
-    }
-
-    .section-head .kicker {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-weight: 800;
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
-      display: inline-block;
-    }
-
-    .section-head h2 {
-      font-size: clamp(1.8rem, 3vw, 2.9rem);
-      line-height: 1.1;
-      margin: 0 0 0.7rem;
-      letter-spacing: -0.04em;
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .services-grid,
-    .seo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .service-item,
-    .seo-card {
-      padding: 1.35rem;
-      border-radius: 24px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      min-height: 150px;
-    }
-
-    .service-item h3,
-    .seo-card h3 {
-      margin: 0 0 0.45rem;
-      font-size: 1.08rem;
-      letter-spacing: -0.02em;
-    }
-
-    .service-item p,
-    .seo-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .storm-strip {
-      padding-top: 0;
-    }
-
-    .storm-strip .cta-band h2 {
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      line-height: 1.08;
-      letter-spacing: -0.04em;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 1rem;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.6rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.94rem;
-    }
-
-    .form-section {
-      background: linear-gradient(180deg, rgba(15,23,42,0.03), rgba(255,255,255,0));
-    }
-
-    .form-shell,
-    .contact-shell {
-      border-radius: 30px;
-      background: var(--surface-strong);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      padding: 1.5rem;
-      backdrop-filter: blur(10px);
-    }
-
-    form {
-      display: grid;
-      gap: 0.95rem;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.95rem;
-    }
-
-    label {
-      display: grid;
-      gap: 0.38rem;
-      font-weight: 700;
-      color: var(--text);
-      font-size: 0.95rem;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 0.95rem 1rem;
-      border: 1px solid rgba(15,23,42,0.12);
-      border-radius: 16px;
-      font: inherit;
-      color: var(--text);
-      background: rgba(255,255,255,0.92);
-    }
-
-    textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: 2px solid rgba(202,162,77,0.35);
-      border-color: var(--accent);
-    }
-
-    .status {
-      font-weight: 700;
-      min-height: 1.25rem;
-      color: var(--text);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .contact-line {
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .contact-line:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .contact-line strong {
-      display: block;
-      margin-bottom: 0.2rem;
-      font-size: 0.95rem;
-    }
-
-    .contact-line span,
-    .contact-line a {
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .text-link {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    footer {
-      padding: 2.2rem 0 6rem;
-    }
-
-    .footer {
-      border-top: 1px solid var(--line);
-      padding-top: 1.5rem;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .footer strong {
-      color: var(--text);
-    }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15,23,42,0.55);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      z-index: 100;
-      backdrop-filter: blur(8px);
-    }
-
-    .modal-overlay.active { display: flex; }
-
-    .modal {
-      width: min(100%, 760px);
-      max-height: 90vh;
-      overflow: auto;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.96);
-      border: 1px solid var(--line);
-      box-shadow: 0 30px 90px rgba(15,23,42,0.18);
-      padding: 1.5rem;
-      position: relative;
-    }
-
-    .modal h3 {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      font-size: 1.5rem;
-      letter-spacing: -0.03em;
-    }
-
-    .modal p {
-      color: var(--muted);
-      margin-top: 0;
-      margin-bottom: 1rem;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(15,23,42,0.03);
-      color: var(--text);
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
-    .mobile-callbar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 120;
-      display: none;
-      padding: 0.75rem 0.9rem calc(0.75rem + env(safe-area-inset-bottom));
-      background: rgba(255,255,255,0.96);
-      border-top: 1px solid rgba(15,23,42,0.08);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 -18px 40px rgba(15, 23, 42, 0.08);
-    }
-
-    .mobile-callbar a {
-      width: 100%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 1rem 1.2rem;
-      border-radius: 999px;
-      background: var(--brand);
-      color: #fff;
-      font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: 0.01em;
-    }
-
-    .nav-links a:focus,
-    .nav-links button:focus,
-    .btn:focus,
-    .text-link:focus,
-    .modal-close:focus,
-    .mobile-callbar a:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    @media (max-width: 980px) {
-      .hero-wrap,
-      .services-grid,
-      .seo-grid,
-      .contact-grid,
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-links {
-        gap: 0.85rem 1rem;
-      }
-
-      .hero {
-        padding: 3.8rem 0 3rem;
-      }
-
-      section {
-        padding: 3.4rem 0;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .mobile-callbar {
-        display: block;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <span>S9 Services Roofing, Siding, Windows &amp; Doors serving Livingston, Shiawassee, Genesee, Oakland &amp; Ingham Counties</span>
-      <a href="tel:+15173756843">Call/Text 517-375-6843</a>
-    </div>
-  </div>
-
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#home" aria-label="S9 Services home">
-        <strong>S9 Services</strong>
-        <span>Roofing • Siding • Windows • Doors</span>
-      </a>
-
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#services">Services</a>
-        <a href="#storm-help">Storm Damage</a>
-        <a href="#service-areas">Service Area</a>
-        <a href="#project-form">Project Request</a>
-        <a href="#contact">Contact</a>
-        <button type="button" id="openInsuranceModal">Insurance Form</button>
-      </nav>
-    </div>
-  </header>
-
-  <main id="home">
-    <section class="hero">
-      <div class="container hero-wrap">
-        <div>
-          <div class="eyebrow">Exterior services</div>
-          <h1>Roofing, Siding, Windows &amp; Doors for Mid-Michigan Homes</h1>
-          <p>S9 Services helps homeowners with exterior projects, storm damage inspections, and insurance claim support through a clean, simple process that works well on desktop and phone.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#project-form">Request a Project</a>
-            <a class="btn btn-secondary" href="tel:+15173756843">Call / Text 517-375-6843</a>
-            <button class="btn btn-gold" type="button" id="openInsuranceModalHero">Storm Damage Form</button>
-          </div>
-        </div>
-
-        <aside class="hero-panel">
-          <h3>Fast help for exterior problems</h3>
-          <p>If your roof, siding, windows, or doors were hit by wind or hail, S9 Services can help you take the next right step.</p>
-          <div class="mini-list">
-            <div>Roofing, siding, windows, and doors</div>
-            <div>Storm damage inspections and support</div>
-            <div>Insurance claim guidance for homeowners</div>
-            <div>Serving Byron and surrounding Mid-Michigan counties</div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="storm-strip" id="storm-help">
-      <div class="container">
-        <div class="cta-band">
-          <h2>Michigan storm damage? Get your exterior checked before the problem spreads.</h2>
-          <p>Wind and hail can damage roofing, siding, windows, and trim without being obvious from the ground. Start with a quick form or call/text now to get moving.</p>
-          <div class="pill-row">
-            <span class="pill">Wind damage</span>
-            <span class="pill">Hail damage</span>
-            <span class="pill">Insurance claim support</span>
-            <span class="pill">Roof, siding, windows &amp; doors</span>
-          </div>
-          <div class="cta-actions">
-            <button class="btn btn-gold" type="button" id="openInsuranceModalCta">Start Storm Damage Form</button>
-            <a class="btn btn-secondary" href="tel:+15173756843">Call / Text 517-375-6843</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Services</span>
-          <h2>Exterior services without the clutter</h2>
-          <p>Focused help for the parts of your home that matter most.</p>
-        </div>
-
-        <div class="services-grid">
-          <article class="service-item">
-            <h3>Roofing</h3>
-            <p>Protection, replacement, repair, and storm-related roofing support for homeowners.</p>
-          </article>
-          <article class="service-item">
-            <h3>Siding</h3>
-            <p>Clean exterior updates that improve protection, durability, and curb appeal.</p>
-          </article>
-          <article class="service-item">
-            <h3>Windows</h3>
-            <p>Exterior window work that improves comfort, performance, and appearance.</p>
-          </article>
-          <article class="service-item">
-            <h3>Doors</h3>
-            <p>Exterior doors that help with security, style, and everyday function.</p>
-          </article>
-          <article class="service-item">
-            <h3>Storm Damage Help</h3>
-            <p>Support when your home may have been affected by wind, hail, or severe weather.</p>
-          </article>
-          <article class="service-item">
-            <h3>Insurance Claim Support</h3>
-            <p>A simple way to start the process and get the right next step for your claim.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="service-areas">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Service Area</span>
-          <h2>Serving Byron and nearby Mid-Michigan communities</h2>
-          <p>Built-in location content helps this page better target local searches for roofing, siding, windows, doors, and storm damage support.</p>
-        </div>
-
-        <div class="seo-grid">
-          <article class="seo-card">
-            <h3>Livingston County</h3>
-            <p>S9 Services helps homeowners in Livingston County with roofing, siding, window, door, and storm damage exterior projects.</p>
-          </article>
-          <article class="seo-card">
-            <h3>Oakland County</h3>
-            <p>For Oakland County homeowners, S9 Services provides clean exterior solutions and support after wind or hail events.</p>
-          </article>
-          <article class="seo-card">
-            <h3>Genesee County</h3>
-            <p>From Byron to nearby Genesee County communities, S9 Services supports homeowners with exterior repair and replacement needs.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="form-section">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Project Request</span>
-          <h2>Request a project</h2>
-          <p>Tell us what you need and we’ll follow up as soon as possible.</p>
-        </div>
-
-        <div class="form-shell" id="project-form">
-          <form class="web3form" data-form-name="Project Request">
-            <input type="hidden" name="access_key" value="a37d190c-b4a6-4df2-9602-c8e39a650400" />
-            <input type="hidden" name="subject" value="New S9 Services Project Request" />
-            <input type="hidden" name="from_name" value="S9 Services Website" />
-            <input type="hidden" name="redirect" value="" />
-            <input type="checkbox" name="botcheck" style="display:none" />
-
-            <div class="grid-2">
-              <label>Full Name
-                <input type="text" name="name" required />
-              </label>
-              <label>Phone Number
-                <input type="tel" name="phone" required />
-              </label>
-            </div>
-
-            <div class="grid-2">
-              <label>Email Address
-                <input type="email" name="email" required />
-              </label>
-              <label>Property Address
-                <input type="text" name="property_address" required />
-              </label>
-            </div>
-
-            <div class="grid-2">
-              <label>Service Needed
-                <select name="service_needed" required>
-                  <option value="">Select one</option>
-                  <option>Roofing</option>
-                  <option>Siding</option>
-                  <option>Windows</option>
-                  <option>Doors</option>
-                  <option>Storm Damage</option>
-                  <option>Other</option>
-                </select>
-              </label>
-              <label>Preferred Contact Method
-                <select name="preferred_contact" required>
-                  <option value="">Select one</option>
-                  <option>Call</option>
-                  <option>Text</option>
-                  <option>Email</option>
-                </select>
-              </label>
-            </div>
-
-            <label>Project Description
-              <textarea name="message" required placeholder="Tell us about the project and what help you need."></textarea>
-            </label>
-
-            <button class="btn btn-primary" type="submit">Request My Project</button>
-            <div class="status" aria-live="polite"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Contact</span>
-          <h2>Contact</h2>
-          <p>Reach out using the option that works best for you.</p>
-        </div>
-
-        <div class="contact-shell">
-          <div class="contact-grid">
-            <div>
-              <div class="contact-line">
-                <strong>Project Requests</strong>
-                <a class="text-link" href="mailto:projects@s9services.com">projects@s9services.com</a>
-              </div>
-              <div class="contact-line">
-                <strong>Questions / Information</strong>
-                <a class="text-link" href="mailto:S9Servicesllc@gmail.com">S9Servicesllc@gmail.com</a>
-              </div>
-            </div>
-            <div>
-              <div class="contact-line">
-                <strong>Call / Text</strong>
-                <a class="text-link" href="tel:+15173756843">517-375-6843</a>
-              </div>
-              <div class="contact-line">
-                <strong>Service Area</strong>
-                <span>Livingston, Shiawassee, Genesee, Oakland &amp; Ingham Counties</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<main>
+    <Hero onOpenProject={() => setActiveForm("project")} onOpenStorm={() => setActiveForm("storm")} />
+    <TrustStrip />
+    <ServicesSection />
+    <StormSection onOpenStorm={() => setActiveForm("storm")} />
+    <ServiceAreasSection />
+    <GallerySection />
+    <ProcessSection />
+    <TestimonialsSection />
+    <FormSection activeForm={activeForm} setActiveForm={setActiveForm} />
+    <FAQSection />
+    <ContactSection />
   </main>
 
-  <div class="modal-overlay" id="insuranceModal" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="insuranceModalTitle">
-      <button class="modal-close" type="button" id="closeInsuranceModal" aria-label="Close insurance form">×</button>
-      <h3 id="insuranceModalTitle">Insurance / Storm Damage Form</h3>
-      <p>For homeowners who may have exterior storm damage and need help getting started.</p>
-      <form class="web3form" data-form-name="Insurance Claim Request">
-        <input type="hidden" name="access_key" value="a37d190c-b4a6-4df2-9602-c8e39a650400" />
-        <input type="hidden" name="subject" value="New S9 Services Insurance / Storm Damage Request" />
-        <input type="hidden" name="from_name" value="S9 Services Website" />
-        <input type="hidden" name="redirect" value="" />
-        <input type="checkbox" name="botcheck" style="display:none" />
+  <Footer />
+  <MobileCallBar />
+</>
 
-        <div class="grid-2">
-          <label>Full Name
-            <input type="text" name="name" required />
-          </label>
-          <label>Phone Number
-            <input type="tel" name="phone" required />
-          </label>
-        </div>
+); }
 
-        <div class="grid-2">
-          <label>Email Address
-            <input type="email" name="email" required />
-          </label>
-          <label>Property Address
-            <input type="text" name="property_address" required />
-          </label>
-        </div>
+function TopBar() { return ( <div className="bg-slate-950 text-white"> <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-4 py-3 text-center text-sm font-medium sm:flex-row sm:items-center sm:justify-between sm:text-left lg:px-6"> <div className="flex items-center justify-center gap-2 sm:justify-start"> <MapPin className="h-4 w-4" /> <span> Serving Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties </span> </div> <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end"> <a href={PHONE_LINK} className="inline-flex items-center gap-2 font-semibold hover:opacity-80"> <Phone className="h-4 w-4" /> {PHONE_DISPLAY} </a> <a href={mailto:${PROJECT_EMAIL}} className="inline-flex items-center gap-2 font-semibold hover:opacity-80"> <Mail className="h-4 w-4" /> Project Requests </a> </div> </div> </div> ); }
 
-        <div class="grid-2">
-          <label>Type of Damage
-            <select name="damage_type" required>
-              <option value="">Select one</option>
-              <option>Roofing</option>
-              <option>Siding</option>
-              <option>Windows</option>
-              <option>Doors</option>
-              <option>Hail</option>
-              <option>Wind</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label>Has a claim been filed?
-            <select name="claim_filed" required>
-              <option value="">Select one</option>
-              <option>Yes</option>
-              <option>No</option>
-              <option>Not Yet</option>
-            </select>
-          </label>
-        </div>
+function Header({ mobileOpen, setMobileOpen }) { const links = [ ["Services", "#services"], ["Storm Damage", "#storm-damage"], ["Service Areas", "#service-areas"], ["Gallery", "#gallery"], ["FAQ", "#faq"], ["Contact", "#contact"], ];
 
-        <div class="grid-2">
-          <label>Insurance Company
-            <input type="text" name="insurance_company" />
-          </label>
-          <label>Preferred Contact Method
-            <select name="preferred_contact" required>
-              <option value="">Select one</option>
-              <option>Call</option>
-              <option>Text</option>
-              <option>Email</option>
-            </select>
-          </label>
-        </div>
+return ( <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur"> <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 lg:px-6"> <a href="#home" className="flex items-center gap-3"> <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm"> <img
+src={LOGOS.icon}
+alt="S9 Services brand mark"
+className="h-full w-full object-contain"
+/> </div> <div> <div className="text-lg font-black tracking-tight">S9 Services</div> <div className="text-sm text-slate-600">Roofing • Siding • Windows • Doors</div> </div> </a>
 
-        <label>Damage Description
-          <textarea name="message" required placeholder="Tell us what happened and what damage you think may be present."></textarea>
-        </label>
+<nav className="hidden items-center gap-6 lg:flex">
+      {links.map(([label, href]) => (
+        <a key={label} href={href} className="text-sm font-semibold text-slate-700 transition hover:text-slate-950">
+          {label}
+        </a>
+      ))}
+      <a
+        href="#project-request"
+        className="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5"
+      >
+        Request a Project
+      </a>
+    </nav>
 
-        <button class="btn btn-primary" type="submit">Get Help With My Claim</button>
-        <div class="status" aria-live="polite"></div>
-      </form>
-    </div>
+    <button
+      type="button"
+      className="inline-flex rounded-2xl border border-slate-200 p-3 lg:hidden"
+      onClick={() => setMobileOpen((v) => !v)}
+      aria-label="Toggle menu"
+    >
+      {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+    </button>
   </div>
 
-  <div class="mobile-callbar">
-    <a href="tel:+15173756843" aria-label="Call or text S9 Services now">📞 Call / Text 517-375-6843</a>
+  {mobileOpen && (
+    <div className="border-t border-slate-200 bg-white px-4 py-4 lg:hidden">
+      <div className="flex flex-col gap-3">
+        {links.map(([label, href]) => (
+          <a
+            key={label}
+            href={href}
+            onClick={() => setMobileOpen(false)}
+            className="rounded-2xl px-3 py-3 font-semibold text-slate-700 hover:bg-slate-100"
+          >
+            {label}
+          </a>
+        ))}
+        <a
+          href="#project-request"
+          onClick={() => setMobileOpen(false)}
+          className="mt-2 inline-flex items-center justify-center rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white"
+        >
+          Request a Project
+        </a>
+      </div>
+    </div>
+  )}
+</header>
+
+); }
+
+function Hero({ onOpenProject, onOpenStorm }) { return ( <section id="home" className="relative overflow-hidden"> <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.16),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.08),transparent_28%)]" /> <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-6 lg:py-24"> <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="flex flex-col justify-center" > <div className="mb-5 inline-flex w-fit items-center rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-amber-800"> Michigan Exterior Contractor </div> <h1 className="max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-7xl"> Roofing, siding, windows, and doors done with a cleaner process. </h1> <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600"> S9 Services LLC helps Mid-Michigan homeowners with exterior projects, storm damage inspections, and insurance claim support across Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties. </p> <div className="mt-8 flex flex-col gap-3 sm:flex-row"> <a
+href="#project-request"
+onClick={onOpenProject}
+className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-bold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5"
+> Request a Project <ArrowRight className="ml-2 h-4 w-4" /> </a> <a
+href={PHONE_LINK}
+className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-4 font-bold text-slate-900 transition hover:-translate-y-0.5"
+> <Phone className="mr-2 h-4 w-4" /> Call / Text {PHONE_DISPLAY} </a> <a
+href="#project-request"
+onClick={onOpenStorm}
+className="inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-4 font-bold text-slate-950 transition hover:-translate-y-0.5"
+> Start Storm Damage Form </a> </div> <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold text-slate-700"> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Roofing</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Siding</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Windows</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Doors</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Storm Damage</span> <span className="rounded-full border border-slate-200 bg-white px-4 py-2">Insurance Claim Support</span> </div> </motion.div>
+
+<motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, delay: 0.08 }}
+      className="grid gap-4"
+    >
+      <div className="rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl shadow-slate-950/15">
+        <div className="mb-5 flex items-center gap-3">
+          <div className="inline-flex rounded-[1.25rem] bg-white p-3 shadow-lg shadow-black/10">
+            <img
+              src={LOGOS.full}
+              alt="S9 Services full logo"
+              className="h-14 w-auto object-contain sm:h-16"
+            />
+          </div>
+        </div>
+        <h2 className="text-2xl font-black tracking-tight">Fast help for exterior problems</h2>
+        <p className="mt-3 text-slate-300">
+          When wind or hail hits, the next step should feel simple. S9 Services helps homeowners take action quickly and confidently.
+        </p>
+        <div className="mt-6 grid gap-4">
+          {[
+            "Roofing, siding, windows, and doors",
+            "Storm damage inspections and homeowner guidance",
+            "Insurance claim support without the clutter",
+            "Mobile-first contact experience with fast call and form options",
+          ].map((item) => (
+            <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 text-amber-300" />
+              <span className="font-medium text-slate-100">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <StatCard icon={Clock3} title="Fast response" text="Call, text, or request a project online." />
+        <StatCard icon={BadgeCheck} title="Simple process" text="Clear next steps from first contact to project planning." />
+      </div>
+    </motion.div>
+  </div>
+</section>
+
+); }
+
+function StatCard({ icon: Icon, title, text }) { return ( <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm"> <div className="mb-4 inline-flex rounded-2xl bg-slate-100 p-3"> <Icon className="h-5 w-5" /> </div> <div className="text-lg font-black tracking-tight">{title}</div> <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p> </div> ); }
+
+function TrustStrip() { const items = [ "Locally focused service area", "Storm damage support", "Mobile-friendly lead capture", "Roofing, siding, windows, and doors", ];
+
+return ( <section className="border-y border-slate-200 bg-white"> <div className="mx-auto grid max-w-7xl gap-4 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-6"> {items.map((item) => ( <div key={item} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 font-semibold text-slate-700"> <ShieldCheck className="h-5 w-5" /> <span>{item}</span> </div> ))} </div> </section> ); }
+
+function ServicesSection() { return ( <section id="services" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
+eyebrow="Services"
+title="Professional exterior services without the clutter"
+text="Your website now positions S9 Services as a cleaner, higher-trust brand with stronger conversion sections and more local relevance."
+/>
+
+<div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    {services.map((service) => {
+      const Icon = service.icon;
+      return (
+        <motion.article
+          key={service.title}
+          whileHover={{ y: -4 }}
+          className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm"
+        >
+          <div className="mb-5 inline-flex rounded-2xl bg-slate-100 p-3">
+            <Icon className="h-6 w-6" />
+          </div>
+          <h3 className="text-xl font-black tracking-tight">{service.title}</h3>
+          <p className="mt-3 text-slate-600 leading-7">{service.description}</p>
+        </motion.article>
+      );
+    })}
+  </div>
+</section>
+
+); }
+
+function StormSection({ onOpenStorm }) { return ( <section id="storm-damage" className="px-4 pb-4 lg:px-6"> <div className="mx-auto max-w-7xl rounded-[2rem] bg-slate-950 px-6 py-10 text-white shadow-2xl shadow-slate-950/15 sm:px-8 lg:px-10 lg:py-14"> <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center"> <div> <div className="mb-4 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.2em] text-amber-300"> Storm Damage Help </div> <h2 className="max-w-3xl text-3xl font-black tracking-tight sm:text-4xl"> Michigan storm damage? Get your exterior checked before the problem spreads. </h2> <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300"> Wind and hail damage can affect roofing, siding, windows, trim, and doors without being obvious from the ground. Start with a form or call/text now. </p> <div className="mt-6 flex flex-wrap gap-3"> {["Wind damage", "Hail damage", "Insurance claim support", "Roof, siding, windows, and doors"].map((item) => ( <span key={item} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white"> {item} </span> ))} </div> </div>
+
+<div className="grid gap-4 rounded-[2rem] border border-white/10 bg-white/5 p-5">
+        <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/10 p-4">
+          <Wind className="mt-1 h-5 w-5 text-amber-300" />
+          <div>
+            <div className="font-bold">Wind Damage</div>
+            <div className="text-sm text-slate-300">Missing shingles, lifted siding, loose trim, and exposed areas can lead to bigger problems quickly.</div>
+          </div>
+        </div>
+        <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/10 p-4">
+          <CloudHail className="mt-1 h-5 w-5 text-amber-300" />
+          <div>
+            <div className="font-bold">Hail Damage</div>
+            <div className="text-sm text-slate-300">Hail can damage roofing and exterior surfaces even when it is hard to spot from the ground.</div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+          <a
+            href="#project-request"
+            onClick={onOpenStorm}
+            className="inline-flex items-center justify-center rounded-full bg-amber-400 px-5 py-3 font-bold text-slate-950"
+          >
+            Start Storm Damage Form
+          </a>
+          <a href={PHONE_LINK} className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 font-bold text-white">
+            Call / Text {PHONE_DISPLAY}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+); }
+
+function ServiceAreasSection() { return ( <section id="service-areas" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
+eyebrow="Service Areas"
+title="Built to rank better across your real service counties"
+text="This section now includes all five counties instead of only showing three cards, giving your local SEO stronger coverage and clearer relevance."
+/> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5"> {counties.map((county) => ( <article key={county.name} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm"> <div className="mb-4 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-extrabold uppercase tracking-[0.2em] text-slate-700"> County </div> <h3 className="text-lg font-black tracking-tight">{county.name}</h3> <p className="mt-3 text-sm leading-7 text-slate-600">{county.text}</p> </article> ))} </div> </section> ); }
+
+function GallerySection() { return ( <section id="gallery" className="bg-white py-16 lg:py-24"> <div className="mx-auto max-w-7xl px-4 lg:px-6"> <SectionIntro
+eyebrow="Gallery"
+title="A stronger visual trust section for photos, before-and-afters, and project proof"
+text="I added a gallery section so you have a place to plug in real project photos later. Replace the placeholders with your own images when ready."
+/> <div className="mb-8 rounded-[2rem] border border-slate-200 bg-slate-50 p-6 shadow-sm"> <div className="mb-4 text-sm font-extrabold uppercase tracking-[0.18em] text-slate-500">Brand assets</div> <div className="grid gap-4 md:grid-cols-3"> <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5 text-center"> <div className="mb-4 flex min-h-[120px] items-center justify-center rounded-[1.25rem] bg-slate-50 p-4"> <img src={LOGOS.full} alt="S9 Services full logo" className="max-h-24 w-auto object-contain" /> </div> <div className="text-sm font-bold text-slate-900">Full Logo</div> </div> <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5 text-center"> <div className="mb-4 flex min-h-[120px] items-center justify-center rounded-[1.25rem] bg-slate-50 p-4"> <img src={LOGOS.brandmark} alt="S9 Services brand mark" className="max-h-24 w-auto object-contain" /> </div> <div className="text-sm font-bold text-slate-900">Brand Mark</div> </div> <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5 text-center"> <div className="mb-4 flex min-h-[120px] items-center justify-center rounded-[1.25rem] bg-slate-50 p-4"> <img src={LOGOS.icon} alt="S9 Services icon logo" className="max-h-24 w-auto object-contain" /> </div> <div className="text-sm font-bold text-slate-900">Icon / Header Mark</div> </div> </div> </div> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"> {galleryItems.map((item) => ( <div key={item.title} className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50 shadow-sm"> <div className="flex aspect-[4/3] items-center justify-center bg-[linear-gradient(135deg,#e2e8f0,#f8fafc)] p-6 text-center text-sm font-semibold text-slate-500"> Add real project image here </div> <div className="p-5"> <h3 className="text-lg font-black tracking-tight">{item.title}</h3> <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p> </div> </div> ))} </div> </div> </section> ); }
+
+function ProcessSection() { const steps = [ "Reach out by form, phone, or text", "Share your project or storm damage details", "Get a clear next step from S9 Services", "Move forward with a cleaner process", ];
+
+return ( <section className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
+eyebrow="Process"
+title="Simple next steps that work well on desktop and phone"
+text="This gives the site a more premium, organized feel and makes it easier for visitors to understand what happens next."
+/> <div className="grid gap-5 lg:grid-cols-4"> {steps.map((step, index) => ( <div key={step} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm"> <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-lg font-black text-white"> {index + 1} </div> <div className="text-lg font-black tracking-tight">{step}</div> </div> ))} </div> </section> ); }
+
+function TestimonialsSection() { const testimonials = [ { name: "Homeowner Review", text: "Add a real customer review here about communication, professionalism, and how easy the process felt.", }, { name: "Storm Damage Client", text: "Use a review here that mentions quick response, claim support, or help after wind or hail damage.", }, { name: "Exterior Project Customer", text: "Include a review here about roofing, siding, windows, or doors and the finished result.", }, ];
+
+return ( <section className="bg-slate-950 py-16 text-white lg:py-24"> <div className="mx-auto max-w-7xl px-4 lg:px-6"> <SectionIntroDark
+eyebrow="Reviews"
+title="A place for trust-building reviews and social proof"
+text="Reviews are one of the highest-impact additions for a contractor site. Swap these placeholders with real customer feedback.
+"
+/> <div className="grid gap-5 lg:grid-cols-3"> {testimonials.map((item) => ( <div key={item.name} className="rounded-[2rem] border border-white/10 bg-white/5 p-6"> <div className="mb-4 flex items-center gap-1 text-amber-300"> <Star className="h-4 w-4 fill-current" /> <Star className="h-4 w-4 fill-current" /> <Star className="h-4 w-4 fill-current" /> <Star className="h-4 w-4 fill-current" /> <Star className="h-4 w-4 fill-current" /> </div> <p className="leading-7 text-slate-200">“{item.text}”</p> <div className="mt-5 font-bold text-white">{item.name}</div> </div> ))} </div> </div> </section> ); }
+
+function FormSection({ activeForm, setActiveForm }) { return ( <section id="project-request" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
+eyebrow="Project Request"
+title="Request a project or start a storm damage claim"
+text="I replaced the auto-popup behavior with a cleaner tabbed form section so visitors can choose the right form without being interrupted."
+/>
+
+<div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <div className="rounded-[2rem] bg-slate-950 p-8 text-white shadow-2xl shadow-slate-950/10">
+      <h3 className="text-2xl font-black tracking-tight">Fast contact options</h3>
+      <p className="mt-3 text-slate-300 leading-7">
+        This section is designed to convert better on mobile and desktop while keeping the process simple.
+      </p>
+
+      <div className="mt-6 grid gap-4">
+        <ContactCardDark icon={Phone} title="Call / Text" value={PHONE_DISPLAY} href={PHONE_LINK} />
+        <ContactCardDark icon={Mail} title="Project Requests" value={PROJECT_EMAIL} href={`mailto:${PROJECT_EMAIL}`} />
+        <ContactCardDark icon={Mail} title="General Info" value={GENERAL_EMAIL} href={`mailto:${GENERAL_EMAIL}`} />
+        <ContactCardDark icon={MapPin} title="Service Area" value="Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties" />
+      </div>
+    </div>
+
+    <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+      <div className="mb-6 inline-flex rounded-full bg-slate-100 p-1">
+        <button
+          type="button"
+          onClick={() => setActiveForm("project")}
+          className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+            activeForm === "project" ? "bg-slate-950 text-white" : "text-slate-700"
+          }`}
+        >
+          Project Form
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveForm("storm")}
+          className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+            activeForm === "storm" ? "bg-slate-950 text-white" : "text-slate-700"
+          }`}
+        >
+          Storm Damage Form
+        </button>
+      </div>
+
+      {activeForm === "project" ? <ProjectForm /> : <StormForm />}
+    </div>
+  </div>
+</section>
+
+); }
+
+function ProjectForm() { return ( <Web3Form formName="Project Request" subject="New S9 Services Project Request" fields={[ { name: "name", label: "Full Name", type: "text", required: true }, { name: "phone", label: "Phone Number", type: "tel", required: true }, { name: "email", label: "Email Address", type: "email", required: true }, { name: "property_address", label: "Property Address", type: "text", required: true }, { name: "service_needed", label: "Service Needed", type: "select", required: true, options: ["Roofing", "Siding", "Windows", "Doors", "Storm Damage", "Other"], }, { name: "preferred_contact", label: "Preferred Contact Method", type: "select", required: true, options: ["Call", "Text", "Email"], }, { name: "message", label: "Project Description", type: "textarea", required: true, placeholder: "Tell us about the project and what help you need.", }, ]} buttonLabel="Request My Project" /> ); }
+
+function StormForm() { return ( <Web3Form formName="Insurance Claim Request" subject="New S9 Services Insurance / Storm Damage Request" fields={[ { name: "name", label: "Full Name", type: "text", required: true }, { name: "phone", label: "Phone Number", type: "tel", required: true }, { name: "email", label: "Email Address", type: "email", required: true }, { name: "property_address", label: "Property Address", type: "text", required: true }, { name: "damage_type", label: "Type of Damage", type: "select", required: true, options: ["Roofing", "Siding", "Windows", "Doors", "Hail", "Wind", "Other"], }, { name: "claim_filed", label: "Has a claim been filed?", type: "select", required: true, options: ["Yes", "No", "Not Yet"], }, { name: "insurance_company", label: "Insurance Company", type: "text", required: false, }, { name: "preferred_contact", label: "Preferred Contact Method", type: "select", required: true, options: ["Call", "Text", "Email"], }, { name: "message", label: "Damage Description", type: "textarea", required: true, placeholder: "Tell us what happened and what damage you think may be present.", }, ]} buttonLabel="Get Help With My Claim" /> ); }
+
+function Web3Form({ formName, subject, fields, buttonLabel }) { const initialState = useMemo(() => { const obj = {}; fields.forEach((field) => { obj[field.name] = ""; }); return obj; }, [fields]);
+
+const [values, setValues] = useState(initialState); const [status, setStatus] = useState(""); const [loading, setLoading] = useState(false);
+
+async function handleSubmit(event) { event.preventDefault(); setLoading(true); setStatus("Sending...");
+
+const formData = new FormData();
+formData.append("access_key", WEB3FORMS_KEY);
+formData.append("subject", subject);
+formData.append("from_name", "S9 Services Website");
+formData.append("botcheck", "");
+
+Object.entries(values).forEach(([key, value]) => {
+  formData.append(key, value);
+});
+
+try {
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    body: formData,
+  });
+
+  const result = await response.json();
+
+  if (result.success) {
+    setStatus("Thanks. Your form has been sent.");
+    setValues(initialState);
+  } else {
+    setStatus(result.message || "Something went wrong. Please try again.");
+  }
+} catch (error) {
+  setStatus("Unable to send right now. Please call or email instead.");
+} finally {
+  setLoading(false);
+}
+
+}
+
+return ( <form onSubmit={handleSubmit} className="grid gap-5"> <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+
+<div className="grid gap-5 md:grid-cols-2">
+    {fields
+      .filter((field) => field.type !== "textarea")
+      .map((field) => (
+        <FormField key={field.name} field={field} value={values[field.name]} setValues={setValues} />
+      ))}
   </div>
 
-  <footer>
-    <div class="container footer">
-      <strong>S9 Services</strong>
-      <div>Byron, MI</div>
-      <div>Roofing • Siding • Windows • Doors • Storm Damage Support</div>
-    </div>
-  </footer>
+  {fields
+    .filter((field) => field.type === "textarea")
+    .map((field) => (
+      <FormField key={field.name} field={field} value={values[field.name]} setValues={setValues} fullWidth />
+    ))}
 
-  <script>
-    function trackLead(eventName, detail = {}) {
-      if (window.umami && typeof window.umami.track === 'function') {
-        window.umami.track(eventName, detail);
-      }
-    }
+  <button
+    type="submit"
+    disabled={loading}
+    className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
+  >
+    {buttonLabel}
+  </button>
+  <div className="min-h-6 text-sm font-semibold text-slate-700">{status}</div>
+</form>
 
-    document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
-      link.addEventListener('click', () => trackLead('click_call', { location: link.textContent.trim() || 'call_link' }));
-    });
+); }
 
-    document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
-      link.addEventListener('click', () => trackLead('click_email', { location: link.textContent.trim() || 'email_link' }));
-    });
+function FormField({ field, value, setValues }) { return ( <label className="grid gap-2 text-sm font-bold text-slate-800"> <span>{field.label}</span> {field.type === "select" ? ( <select required={field.required} value={value} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className="rounded-2xl border border-slate-300 bg-white px-4 py-4 text-base font-medium text-slate-900 outline-none ring-0 transition focus:border-slate-950" > <option value="">Select one</option> {field.options.map((option) => ( <option key={option} value={option}> {option} </option> ))} </select> ) : field.type === "textarea" ? ( <textarea required={field.required} value={value} placeholder={field.placeholder || ""} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className="min-h-[160px] rounded-[1.5rem] border border-slate-300 bg-white px-4 py-4 text-base font-medium text-slate-900 outline-none transition focus:border-slate-950" /> ) : ( <input type={field.type} required={field.required} value={value} onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))} className="rounded-2xl border border-slate-300 bg-white px-4 py-4 text-base font-medium text-slate-900 outline-none transition focus:border-slate-950" /> )} </label> ); }
 
-    document.querySelectorAll('a[href="#project-form"]').forEach((link) => {
-      link.addEventListener('click', () => trackLead('open_project_form'));
-    });
+function FAQSection() { return ( <section id="faq" className="bg-white py-16 lg:py-24"> <div className="mx-auto max-w-5xl px-4 lg:px-6"> <SectionIntro
+eyebrow="FAQ"
+title="Frequently asked questions"
+text="FAQ sections help with trust, conversions, and long-tail search visibility."
+/> <div className="grid gap-4"> {faqs.map((faq) => ( <details key={faq.q} className="group rounded-[1.75rem] border border-slate-200 bg-slate-50 p-6 shadow-sm"> <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-black tracking-tight text-slate-950"> {faq.q} <ChevronRight className="h-5 w-5 transition group-open:rotate-90" /> </summary> <p className="mt-4 leading-7 text-slate-600">{faq.a}</p> </details> ))} </div> </div> </section> ); }
 
-    const insuranceModal = document.getElementById('insuranceModal');
-    const openInsuranceModal = document.getElementById('openInsuranceModal');
-    const openInsuranceModalHero = document.getElementById('openInsuranceModalHero');
-    const openInsuranceModalCta = document.getElementById('openInsuranceModalCta');
-    const closeInsuranceModal = document.getElementById('closeInsuranceModal');
+function ContactSection() { return ( <section id="contact" className="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24"> <SectionIntro
+eyebrow="Contact"
+title="Reach out using the option that works best for you"
+text="This version makes your contact information more prominent and easier to use on phones."
+/> <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"> <ContactCard icon={Phone} title="Call / Text" value={PHONE_DISPLAY} href={PHONE_LINK} /> <ContactCard icon={Mail} title="Project Requests" value={PROJECT_EMAIL} href={mailto:${PROJECT_EMAIL}} /> <ContactCard icon={Mail} title="General Info" value={GENERAL_EMAIL} href={mailto:${GENERAL_EMAIL}} /> <ContactCard icon={MapPin} title="Service Area" value="Livingston, Shiawassee, Genesee, Oakland, and Ingham Counties" /> </div> </section> ); }
 
-    function showInsuranceModal() {
-      if (!insuranceModal) return;
-      insuranceModal.classList.add('active');
-      insuranceModal.setAttribute('aria-hidden', 'false');
-      trackLead('open_claims_form');
-    }
+function ContactCard({ icon: Icon, title, value, href }) { const content = ( <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1"> <div className="mb-5 inline-flex rounded-2xl bg-slate-100 p-3"> <Icon className="h-5 w-5" /> </div> <div className="text-sm font-extrabold uppercase tracking-[0.18em] text-slate-500">{title}</div> <div className="mt-3 text-base font-bold text-slate-900 break-words">{value}</div> </div> );
 
-    function hideInsuranceModal() {
-      if (!insuranceModal) return;
-      insuranceModal.classList.remove('active');
-      insuranceModal.setAttribute('aria-hidden', 'true');
-      sessionStorage.setItem('insuranceModalDismissed', 'true');
-    }
+if (href) return <a href={href}>{content}</a>; return content; }
 
-    if (openInsuranceModal) openInsuranceModal.addEventListener('click', showInsuranceModal);
-    if (openInsuranceModalHero) openInsuranceModalHero.addEventListener('click', showInsuranceModal);
-    if (openInsuranceModalCta) openInsuranceModalCta.addEventListener('click', showInsuranceModal);
-    if (closeInsuranceModal) closeInsuranceModal.addEventListener('click', hideInsuranceModal);
+function ContactCardDark({ icon: Icon, title, value, href }) { const content = ( <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"> <div className="flex items-start gap-3"> <div className="mt-0.5 rounded-xl bg-white/10 p-2"> <Icon className="h-4 w-4" /> </div> <div> <div className="text-xs font-extrabold uppercase tracking-[0.18em] text-slate-400">{title}</div> <div className="mt-1 break-words font-semibold text-white">{value}</div> </div> </div> </div> );
 
-    if (insuranceModal) {
-      insuranceModal.addEventListener('click', (event) => {
-        if (event.target === insuranceModal) hideInsuranceModal();
-      });
+if (href) return <a href={href}>{content}</a>; return content; }
 
-      if (!sessionStorage.getItem('insuranceModalDismissed')) {
-        window.addEventListener('load', () => {
-          setTimeout(showInsuranceModal, 250);
-        });
-      }
-    }
+function Footer() { return ( <footer className="border-t border-slate-200 bg-slate-50 pb-28 pt-10 lg:pb-10"> <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-[1fr_auto] lg:px-6"> <div> <div className="flex items-center gap-3"> <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm"> <img src={LOGOS.brandmark} alt="S9 Services brand mark" className="h-full w-full object-contain" /> </div> <div> <div className="text-lg font-black tracking-tight">S9 Services LLC</div> <div className="text-sm text-slate-600">Byron, Michigan</div> </div> </div> <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600"> Roofing, siding, windows, doors, storm damage inspections, and insurance claim support for Mid-Michigan homeowners. </p> </div> <div className="flex flex-col gap-2 text-sm font-semibold text-slate-600 lg:items-end"> <a href="#services" className="hover:text-slate-950">Services</a> <a href="#project-request" className="hover:text-slate-950">Project Request</a> <a href="#contact" className="hover:text-slate-950">Contact</a> <a href="#" className="hover:text-slate-950">Privacy Policy</a> <a href="#" className="hover:text-slate-950">Terms of Service</a> </div> </div> </footer> ); }
 
-    const forms = document.querySelectorAll('.web3form');
+function MobileCallBar() { return ( <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-4 backdrop-blur lg:hidden"> <a
+href={PHONE_LINK}
+className="inline-flex w-full items-center justify-center rounded-full bg-slate-950 px-6 py-4 font-extrabold text-white shadow-lg shadow-slate-950/15"
+> <Phone className="mr-2 h-4 w-4" /> Call / Text {PHONE_DISPLAY} </a> </div> ); }
 
-    forms.forEach((form) => {
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const status = form.querySelector('.status');
-        const data = new FormData(form);
-        if (status) status.textContent = 'Sending...';
+function SectionIntro({ eyebrow, title, text }) { return ( <div className="mb-10 max-w-3xl"> <div className="mb-3 inline-flex rounded-full bg-slate-100 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-slate-700"> {eyebrow} </div> <h2 className="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">{title}</h2> <p className="mt-4 text-lg leading-8 text-slate-600">{text}</p> </div> ); }
 
-        try {
-          const response = await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            body: data,
-          });
-
-          const result = await response.json();
-
-          if (result.success) {
-            if (status) status.textContent = 'Thanks! Your form has been sent.';
-            trackLead('form_submit_success', {
-              form_name: form.dataset.formName || 'unknown_form'
-            });
-            form.reset();
-            if (form.dataset.formName === 'Insurance Claim Request') {
-              setTimeout(hideInsuranceModal, 700);
-            }
-          } else {
-            if (status) status.textContent = result.message || 'Something went wrong. Please try again.';
-            trackLead('form_submit_error', {
-              form_name: form.dataset.formName || 'unknown_form'
-            });
-          }
-        } catch (error) {
-          if (status) status.textContent = 'Unable to send right now. Please call or email instead.';
-          trackLead('form_submit_error', {
-            form_name: form.dataset.formName || 'unknown_form'
-          });
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+function SectionIntroDark({ eyebrow, title, text }) { return ( <div className="mb-10 max-w-3xl"> <div className="mb-3 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-amber-300"> {eyebrow} </div> <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">{title}</h2> <p className="mt-4 text-lg leading-8 text-slate-300">{text}</p> </div> ); }
