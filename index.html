@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S9 Services</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #000;
+    text-align: center;
+}
+
+header {
+    padding: 20px;
+}
+
+.logo {
+    width: 120px;
+}
+
+.hero {
+    padding: 30px 20px;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+.services {
+    padding: 30px 20px;
+}
+
+.services h2 {
+    margin-bottom: 10px;
+}
+
+.services p {
+    letter-spacing: 2px;
+}
+
+.cta {
+    background: black;
+    color: white;
+    padding: 20px;
+}
+
+button {
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.call {
+    background: white;
+    color: black;
+}
+
+.quote {
+    background: black;
+    color: white;
+    border: 1px solid white;
+}
+
+/* Popup Form */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    margin: 20% auto;
+    width: 80%;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="logo.png" class="logo">
+</header>
+
+<section class="hero">
+    <h1>Trusted Residential Builder & Contractor</h1>
+    <p>Serving Mid-Michigan</p>
+</section>
+
+<section class="services">
+    <h2>S9 Exterior Services</h2>
+    <p>ROOFING • SIDING • WINDOWS • DOORS • DECKS</p>
+</section>
+
+<section class="cta">
+    <h2>S9 Handles Your Project From Start to Finish</h2>
+
+    <button class="call" onclick="window.location.href='tel:5173756843'">
+        Call Now
+    </button>
+
+    <button class="quote" onclick="openForm()">
+        Free Quote
+    </button>
+</section>
+
+<!-- Popup Form -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h3>Request a Free Quote</h3>
+
+        <input type="text" placeholder="Name">
+        <input type="text" placeholder="Phone">
+        
+        <select>
+            <option>Project Type</option>
+            <option>Roofing</option>
+            <option>Siding</option>
+            <option>Windows</option>
+            <option>Doors</option>
+            <option>Deck</option>
+            <option>Storm Damage / Insurance</option>
+        </select>
+
+        <button onclick="closeForm()">Submit</button>
+    </div>
+</div>
+
+<script>
+function openForm() {
+    document.getElementById("popup").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("popup").style.display = "none";
+}
+</script>
+
+</body>
+</html>
