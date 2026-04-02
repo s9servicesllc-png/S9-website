@@ -23,7 +23,7 @@ Make sure these exact file names are in your repo (case matters):
 index.html
 logo.png
 Hero.png
-ad1.png (optional)
+Ad1.png (optional)
 
 Optional later:
 
